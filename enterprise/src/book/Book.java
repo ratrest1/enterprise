@@ -4,13 +4,14 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 import db.AuthorGateway;
+import db.BookGateway;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import publisher.Publisher;
 
 public class Book {
-	//private BookGateway gateway;
+	private BookGateway gateway;
 	
 	private int id;
 	private SimpleStringProperty title;
@@ -115,5 +116,15 @@ public class Book {
 	}
 	public void setDateAdded(LocalDate dateAdded) {
 		this.dateAdded.set( dateAdded );
+	}
+
+	public void setPublisher(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setGateway(BookGateway bookGateway) {
+		// TODO Auto-generated method stub
+		this.gateway = bookGateway;
 	}
 }

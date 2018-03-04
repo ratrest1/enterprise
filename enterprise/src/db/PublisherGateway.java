@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import book.Book;
 import utils.AppException;
 import publisher.Publisher;
 import javafx.collections.FXCollections;
@@ -20,5 +21,15 @@ public class PublisherGateway {
 
 	public PublisherGateway (Connection conn) {
 		this.conn = conn;
+	}
+	
+	public ObservableList<Publisher> getPublishers () throws AppException {
+		ObservableList<Publisher> publishers = FXCollections.observableArrayList();
+		return publishers;
+	}
+	
+	public String getPublisherById (int pubID) {
+		ObservableList<Publisher> publishers = getPublishers();
+		return null;
 	}
 }

@@ -1,7 +1,7 @@
 package db;
 
 import java.sql.Connection;
-import java.sql.Date;
+//import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +13,7 @@ import utils.AppException;
 import book.Book;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import publisher.Publisher;
 
 public class BookGateway {
 	private static Logger logger = LogManager.getLogger();		//Logger
@@ -56,6 +57,7 @@ public class BookGateway {
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
 				Book book = new Book();
+				Publisher publisher = new Publisher();
 				
 				book.setGateway(this);
 				book.setId(rs.getInt("id"));

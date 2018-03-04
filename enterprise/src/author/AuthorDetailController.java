@@ -75,7 +75,7 @@ public class AuthorDetailController extends ControllerBase implements Initializa
 	 */
 	@FXML
     void OnSaveAuthorClicked(MouseEvent event) {
-		detailedAuthor.setGateway(this.viewLocation);
+		detailedAuthor.setGateway((AuthorGateway)this.viewLocation);
 		detailedAuthor.saveAuthor( viewType );
 		getLoader().LoadController(getLoader().AUT_LIST, null);
     }

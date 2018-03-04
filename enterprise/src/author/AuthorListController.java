@@ -75,7 +75,7 @@ public class AuthorListController extends ControllerBase implements Initializabl
     
     @FXML
     void OnDeleteClicked(MouseEvent event) {
-    	viewLocation.deleteAuthor(selAuthor);
+    	viewLocation.delete(selAuthor);
     	getLoader().LoadController(getLoader().AUT_LIST, null);
     }
 
@@ -84,13 +84,12 @@ public class AuthorListController extends ControllerBase implements Initializabl
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		authors = viewLocation.readAuthor();
-		/*
-		Author a1 = new Author("Gene","Euss");
-		Author a2 = new Author("George","Orwell");
-		authors.add(a1);
-		authors.add(a2);
-		*/
+		ObservableList<Object> tmp = viewLocation.read();
+		authors = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++ ) {
+			authors.add( (Author)tmp.get(i) );
+		}
+		
 		authorList.setItems(authors);
 	}
 }

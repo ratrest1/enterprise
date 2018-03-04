@@ -8,13 +8,15 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import author.Author;
 import utils.AppException;
+import utils.GatewayBase;
 import book.Book;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import publisher.Publisher;
 
-public class BookGateway {
+public class BookGateway extends GatewayBase{
 	private static Logger logger = LogManager.getLogger();		//Logger
 	private Connection conn;
 	private PublisherGateway pubGateway;
@@ -172,6 +174,23 @@ public class BookGateway {
 			}
 		}
 		return books;
+	}
+
+	@Override
+	public ObservableList<Object> read() {
+		ObservableList<Book> tmpAuthors = readBook();
+		ObservableList<Object> retList = FXCollections.observableArrayList();
+		for(int i = 0; i < tmpAuthors.size(); i++)
+		{
+			retList.add( tmpAuthors.get(i) );
+		}
+		return retList;
+	}
+
+	@Override
+	public void delete(Object arg) {
+		Book tmp = (Book) arg;
+		deleteBook(tmp);
 	}
 	
 }

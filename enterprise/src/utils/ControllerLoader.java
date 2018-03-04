@@ -24,6 +24,8 @@ import javafx.stage.Stage;
 public class ControllerLoader {
 	public static final int AUT_LIST = 1;
 	public static final int AUT_DETAIL = 2;
+	public static final int BOK_LIST = 3;
+	public static final int BOK_DETAIL = 4;
 	
 	private Connection connection;
 	private static Logger logger = LogManager.getLogger();		//Logger

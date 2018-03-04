@@ -9,23 +9,23 @@ import db.AuthorGateway;
 public class ControllerBase 
 {
 		private ControllerLoader loader;		        //Loader for loading views/controllers
-		protected AuthorGateway viewLocation;		//location of view xml file on the disk
+		protected GatewayBase viewLocation;		//location of view xml file on the disk
 		
 		/**
 		 * 		Constructor
 		 * @param authorGateway the location of view xml file on the disk
 		 */
-		protected ControllerBase(AuthorGateway authorGateway){
+		protected ControllerBase(GatewayBase authorGateway){
 			setViewLocation(authorGateway);
 			loader = ControllerLoader.getInstance();
 		}
 
 		//Accessors
-		public AuthorGateway getViewLocation() {
+		public GatewayBase getViewLocation() {
 			return viewLocation;
 		}
 
-		public void setViewLocation(AuthorGateway viewLocation) {
+		public void setViewLocation(GatewayBase viewLocation) {
 			this.viewLocation = viewLocation;
 		}
 

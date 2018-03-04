@@ -13,8 +13,9 @@ import author.Author;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.AppException;
+import utils.GatewayBase;
 
-public class AuthorGateway {
+public class AuthorGateway extends GatewayBase{
 	private static Logger logger = LogManager.getLogger();		//Logger
 	private Connection conn;
 
@@ -127,5 +128,22 @@ public class AuthorGateway {
 				throw new AppException(e);
 			}
 		}
+	}
+
+	@Override
+	public ObservableList<Object> read() {
+		ObservableList<Author> tmpAuthors = readAuthor();
+		ObservableList<Object> retList = FXCollections.observableArrayList();
+		for(int i = 0; i < tmpAuthors.size(); i++)
+		{
+			retList.add( tmpAuthors.get(i) );
+		}
+		return retList;
+	}
+
+	@Override
+	public void delete(Object arg) {
+		Author tmp = (Author) arg;
+		deleteAuthor(tmp);
 	}
 }

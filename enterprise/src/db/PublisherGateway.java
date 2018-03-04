@@ -25,11 +25,36 @@ public class PublisherGateway {
 	
 	public ObservableList<Publisher> getPublishers () throws AppException {
 		ObservableList<Publisher> publishers = FXCollections.observableArrayList();
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("select * from publisher order by id");
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				Publisher publisher = new Publisher();
+				
+				publisher.setId(rs.getInt("id"));
+				publisher.setPublisherName(rs.getString("publisher_name"));
+				publishers.add(publisher);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if (st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
 		return publishers;
 	}
 	
 	public String getPublisherById (int pubID) {
 		ObservableList<Publisher> publishers = getPublishers();
+		// get right publisher from publishers using pubID
+		// return specific publisher's name once acquired
 		return null;
 	}
 }

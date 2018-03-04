@@ -51,8 +51,12 @@ public class PublisherGateway {
 	
 	public String getPublisherById (int pubID) {
 		ObservableList<Publisher> publishers = getPublishers();
-		// get right publisher from publishers using pubID
-		// return specific publisher's name once acquired
-		return null;
+		String str = null;
+		
+		for (Publisher publisher : publishers)
+			if (publisher.getId() == pubID)
+				str = new String(publisher.getPublisherName());
+		
+		return str;
 	}
 }

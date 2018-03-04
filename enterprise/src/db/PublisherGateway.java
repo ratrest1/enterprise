@@ -49,14 +49,13 @@ public class PublisherGateway {
 		return publishers;
 	}
 	
-	public String getPublisherById (int pubID) {
+	public Publisher getPublisherById (int pubID) {
 		ObservableList<Publisher> publishers = getPublishers();
-		String str = null;
 		
 		for (Publisher publisher : publishers)
 			if (publisher.getId() == pubID)
-				str = new String(publisher.getPublisherName());
+				return publisher;
 		
-		return str;
+		return null;
 	}
 }

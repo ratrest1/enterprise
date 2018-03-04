@@ -17,9 +17,11 @@ import publisher.Publisher;
 public class BookGateway {
 	private static Logger logger = LogManager.getLogger();		//Logger
 	private Connection conn;
+	private PublisherGateway pubGateway;
 
 	public BookGateway (Connection conn) {
 		this.conn = conn;
+		pubGateway = new PublisherGateway(conn);
 	}
 	
 	public void createBook (Book book) throws AppException {
@@ -56,17 +58,18 @@ public class BookGateway {
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
 				Book book = new Book();
-				Publisher publisher = new Publisher();
+				int pubID;
 				
 				book.setGateway(this);
 				book.setId(rs.getInt("id"));
 				book.setTitle(rs.getString("title"));
 				book.setSummary(rs.getString("summary"));
 				book.setYearPublished(rs.getInt("publisher_year"));
-				// need to grab publisher into a publisher object
-				//book.setPublisher(rs.getString("publisher_id"));
+				pubID = rs.getInt("publisher_id");
+				book.setPublisher(pubGateway.getPublisherById(pubID));
 				book.setIsbn(rs.getString("isbn"));
 				book.setDateAdded(rs.getDate("date_added").toLocalDate());
+				
 				books.add(book);
 			}
 		} catch (SQLException e) {
@@ -142,15 +145,18 @@ public class BookGateway {
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
 				Book book = new Book();
+				int pubID;
 				
 				book.setGateway(this);
 				book.setId(rs.getInt("id"));
 				book.setTitle(rs.getString("title"));
 				book.setSummary(rs.getString("summary"));
 				book.setYearPublished(rs.getInt("publisher_year"));
-				//book.setPublisher(rs.getString("publisher_id"));
+				pubID = rs.getInt("publisher_id");
+				book.setPublisher(pubGateway.getPublisherById(pubID));
 				book.setIsbn(rs.getString("isbn"));
 				book.setDateAdded(rs.getDate("date_added").toLocalDate());
+				
 				books.add(book);
 			}
 		} catch (SQLException e) {

@@ -66,7 +66,7 @@ public class BookGateway extends GatewayBase{
 				book.setId(rs.getInt("id"));
 				book.setTitle(rs.getString("title"));
 				book.setSummary(rs.getString("summary"));
-				book.setYearPublished(rs.getInt("publisher_year"));
+				book.setYearPublished(rs.getInt("year_published"));
 				pubID = rs.getInt("publisher_id");
 				book.setPublisher(pubGateway.getPublisherById(pubID));
 				book.setIsbn(rs.getString("isbn"));
@@ -153,7 +153,7 @@ public class BookGateway extends GatewayBase{
 				book.setId(rs.getInt("id"));
 				book.setTitle(rs.getString("title"));
 				book.setSummary(rs.getString("summary"));
-				book.setYearPublished(rs.getInt("publisher_year"));
+				book.setYearPublished(rs.getInt("year_published"));
 				pubID = rs.getInt("publisher_id");
 				book.setPublisher(pubGateway.getPublisherById(pubID));
 				book.setIsbn(rs.getString("isbn"));

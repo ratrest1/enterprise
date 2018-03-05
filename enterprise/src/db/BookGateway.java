@@ -8,13 +8,11 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import author.Author;
 import utils.AppException;
 import utils.GatewayBase;
 import book.Book;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import publisher.Publisher;
 
 public class BookGateway extends GatewayBase{
 	private static Logger logger = LogManager.getLogger();		//Logger

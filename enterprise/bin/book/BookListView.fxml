@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -40,7 +40,7 @@
             <Label text="Enter Book Title Below" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <TextField fx:id="searchTerm" scaleX="0.5" BorderPane.alignment="CENTER" />
+            <TextField fx:id="searchTerm" onKeyPressed="#OnSearchKeyPressed" scaleX="0.5" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </bottom>

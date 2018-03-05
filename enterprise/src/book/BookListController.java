@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import utils.ControllerBase;
 import utils.ControllerLoader;
@@ -28,6 +30,8 @@ public class BookListController extends ControllerBase implements Initializable{
     @FXML private ListView<Book> bookList;
     @FXML private Button addBookButton;
     @FXML private Button deleteBookButton;
+    @FXML private TextField searchTerm;
+    
     
     private ObservableList<Book> books;						//List of Books
     private Book selBook;
@@ -38,6 +42,11 @@ public class BookListController extends ControllerBase implements Initializable{
 		getLoader().LoadController(ControllerLoader.BOK_DETAIL, b);
     }
 
+    @FXML
+    void OnSearchKeyPressed(KeyEvent event) {
+
+    }
+    
     @FXML
     void OnBookClicked(MouseEvent event) {
     	if(event.getClickCount() == 2) {

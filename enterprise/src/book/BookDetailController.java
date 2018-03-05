@@ -1,11 +1,13 @@
 package book;
 
+import publisher.Publisher;
 import utils.ControllerBase;
 import utils.GatewayBase;
 import db.BookGateway;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -29,7 +31,7 @@ public class BookDetailController extends ControllerBase{
     @FXML private MenuItem quitMenu;
     @FXML private Label firstName;
     @FXML private TextField title;
-    @FXML private TextField publisher;
+    @FXML private ComboBox<Publisher> pubCombo;
     @FXML private TextField Isbn;
     @FXML private TextField yrPublished;
     @FXML private TextArea summary;

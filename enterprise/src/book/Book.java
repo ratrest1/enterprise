@@ -30,7 +30,7 @@ public class Book {
 		isbn = new SimpleStringProperty();
 	}
 	
-	public boolean saveBook() {
+	public boolean saveBook(int viewType) {
 		if(id < 0) {
 			return false;
 		}
@@ -52,7 +52,12 @@ public class Book {
 		}
 		
 		//insert to db
-		
+		if( viewType == 0 ) { 
+			// update Author table
+			gateway.updateBook(this);
+		}else {
+			gateway.createBook(this);
+		}
 		return true;
 	}
 

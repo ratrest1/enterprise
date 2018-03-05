@@ -14,7 +14,11 @@ import org.apache.logging.log4j.Logger;
 import author.Author;
 import author.AuthorDetailController;
 import author.AuthorListController;
+import book.Book;
+import book.BookDetailController;
+import book.BookListController;
 import db.AuthorGateway;
+import db.BookGateway;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -68,6 +72,14 @@ public class ControllerLoader {
 				case AUT_DETAIL:
 					fxmlFile = this.getClass().getResource("../author/AuthorDetailView.fxml");
 					controller = new AuthorDetailController(new AuthorGateway(connection),(Author) arg);
+					break;
+				case BOK_LIST:
+					fxmlFile = this.getClass().getResource("../book/BookListView.fxml");
+					controller = new BookListController(new BookGateway(connection));
+					break;
+				case BOK_DETAIL:
+					fxmlFile = this.getClass().getResource("../book/BookDetailView.fxml");
+					controller = new BookDetailController(new BookGateway(connection),(Book) arg);
 					break;
 			}
 		

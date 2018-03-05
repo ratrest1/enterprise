@@ -23,7 +23,7 @@
       </MenuBar>
    </top>
    <center>
-      <ListView fx:id="bookList" onMouseClicked="#OnAuthorClicked" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="bookList" onMouseClicked="#OnBookClicked" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <BorderPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">

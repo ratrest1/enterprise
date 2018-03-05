@@ -28,6 +28,7 @@ public class AuthorListController extends ControllerBase implements Initializabl
 	private static Logger logger = LogManager.getLogger();		//Logger
 	
 	@FXML private MenuItem menuClose;							//JavaFX Stuff
+	@FXML private MenuItem menuBookList;
     @FXML private MenuItem sortBy;
     @FXML private ListView<Author> authorList;
     @FXML private Button deleteAuthorButton;
@@ -50,6 +51,11 @@ public class AuthorListController extends ControllerBase implements Initializabl
      */
     @FXML void OnClose(ActionEvent event) {
     	System.exit(0);
+    }
+    
+    @FXML
+    void OnBookList(ActionEvent event) {
+    	getLoader().LoadController(ControllerLoader.BOK_LIST, null);
     }
     
     /**

@@ -22,7 +22,7 @@ import utils.GatewayBase;
 
 public class BookListController extends ControllerBase implements Initializable{
 
-    protected BookListController(BookGateway bookGateway) {
+    public BookListController(BookGateway bookGateway) {
 		super((GatewayBase)bookGateway);
 	}
 

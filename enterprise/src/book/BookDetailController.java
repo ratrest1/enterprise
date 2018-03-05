@@ -16,7 +16,7 @@ import javafx.scene.input.MouseEvent;
 
 public class BookDetailController extends ControllerBase{
 
-    protected BookDetailController(GatewayBase bookGateway, Book arg) {
+    public BookDetailController(GatewayBase bookGateway, Book arg) {
 		super(bookGateway);
 		detailedBook = arg;
 		if( detailedBook.getId() == 0 ) {

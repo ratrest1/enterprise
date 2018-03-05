@@ -19,7 +19,7 @@ import publisher.Publisher;
 public class BookGateway extends GatewayBase{
 	private static Logger logger = LogManager.getLogger();		//Logger
 	private Connection conn;
-	private PublisherGateway pubGateway;
+	public PublisherGateway pubGateway;
 
 	public BookGateway (Connection conn) {
 		this.conn = conn;

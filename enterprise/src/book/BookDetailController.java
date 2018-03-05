@@ -3,9 +3,16 @@ package book;
 import publisher.Publisher;
 import utils.ControllerBase;
 import utils.GatewayBase;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import db.BookGateway;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -13,8 +20,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.util.converter.NumberStringConverter;
 
-public class BookDetailController extends ControllerBase{
+public class BookDetailController extends ControllerBase implements Initializable{
 
     public BookDetailController(GatewayBase bookGateway, Book arg) {
 		super(bookGateway);
@@ -39,6 +47,7 @@ public class BookDetailController extends ControllerBase{
     
     private Book detailedBook;								//Author class of the specified author
     private int viewType;
+    
 
     @FXML
     void OnAuthorClicked(ActionEvent event) {
@@ -61,5 +70,17 @@ public class BookDetailController extends ControllerBase{
 		detailedBook.saveBook( viewType );
 		getLoader().LoadController(getLoader().BOK_LIST, null);
     }
+    
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+		title.textProperty().bindBidirectional(detailedBook.titleProperty());
+		summary.textProperty().bindBidirectional(detailedBook.summaryProperty());
+		yrPublished.textProperty().bindBidirectional(detailedBook.yearPublishedProperty(),  new NumberStringConverter() );
+		BookGateway bg =  (BookGateway) this.viewLocation;
+		pubCombo.setItems( bg.pubGateway.getPublishers() );
+		pubCombo.setValue(detailedBook.getPublisher());
+		//pubCombo.textProperty().bindBidirectional(detailedBook.genderProperty());
+		Isbn.textProperty().bindBidirectional(detailedBook.isbnProperty());
+	}
 
 }

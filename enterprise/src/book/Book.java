@@ -28,6 +28,7 @@ public class Book {
 		yearPublished = new SimpleIntegerProperty();
 		publisher = new SimpleObjectProperty<Publisher>();
 		isbn = new SimpleStringProperty();
+		dateAdded = new SimpleObjectProperty<LocalDate>();
 	}
 	
 	public boolean saveBook(int viewType) {
@@ -62,13 +63,17 @@ public class Book {
 	}
 
 	//Accessors
+	public String toString() {
+		return title.get();
+	}
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public SimpleStringProperty getTitleProperty() {
+	public SimpleStringProperty titleProperty() {
 		return title;
 	}
 	public String getTitle() {
@@ -77,7 +82,7 @@ public class Book {
 	public void setTitle(String title) {
 		this.title.set(title);
 	}
-	public SimpleStringProperty getSummaryProperty() {
+	public SimpleStringProperty summaryProperty() {
 		return summary;
 	}
 	public String getSummary() {
@@ -86,7 +91,7 @@ public class Book {
 	public void setSummary(String summary) {
 		this.summary.set( summary );
 	}
-	public SimpleIntegerProperty getYearPublishedProperty() {
+	public SimpleIntegerProperty yearPublishedProperty() {
 		return yearPublished;
 	}
 	public int getYearPublished() {
@@ -95,7 +100,7 @@ public class Book {
 	public void setYearPublished(int yearPublished) {
 		this.yearPublished.set( yearPublished );
 	}
-	public SimpleObjectProperty<Publisher> getPublisherProperty() {
+	public SimpleObjectProperty<Publisher> publisherProperty() {
 		return publisher;
 	}
 	public Publisher getPublisher() {
@@ -104,7 +109,7 @@ public class Book {
 	public void setPublisher( Publisher publisher) {
 		this.publisher.set( publisher );
 	}
-	public SimpleStringProperty getIsbnProperty() {
+	public SimpleStringProperty isbnProperty() {
 		return isbn;
 	}
 	public String getIsbn() {
@@ -113,7 +118,7 @@ public class Book {
 	public void setIsbn(String isbn) {
 		this.isbn.set( isbn );
 	}
-	public SimpleObjectProperty<LocalDate> getDateAddedProperty() {
+	public SimpleObjectProperty<LocalDate> dateAddedProperty() {
 		return dateAdded;
 	}
 	public LocalDate getDateAdded() {
@@ -123,13 +128,7 @@ public class Book {
 		this.dateAdded.set( dateAdded );
 	}
 
-	public void setPublisher(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void setGateway(BookGateway bookGateway) {
-		// TODO Auto-generated method stub
 		this.gateway = bookGateway;
 	}
 }

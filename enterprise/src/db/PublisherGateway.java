@@ -50,6 +50,7 @@ public class PublisherGateway {
 	}
 	
 	public Publisher getPublisherById (int pubID) {
+		// In the future, use a query where I use the ID to fetch the publisher
 		ObservableList<Publisher> publishers = getPublishers();
 		
 		for (Publisher publisher : publishers)

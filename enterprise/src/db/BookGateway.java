@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import audit.AuditTrailEntry;
 import utils.AppException;
 import utils.GatewayBase;
 import book.Book;
@@ -97,7 +98,7 @@ public class BookGateway extends GatewayBase{
 					+ "publisher_id = ?, year_published = ?, "
 					+ "summary = ?, title = ? where id = ?");
 			st.setString(1, book.getIsbn());
-			//st.setString(2, book.getPublisher());
+			st.setInt(2, book.getPublisher().getId());
 			st.setInt(3, book.getYearPublished());
 			st.setString(4, book.getSummary());
 			st.setString(5, book.getTitle());
@@ -197,6 +198,44 @@ public class BookGateway extends GatewayBase{
 		deleteBook(tmp);
 	}
 	
+	public ObservableList<AuditTrailEntry> getAuditTrail (int bookId) {
+		logger.info("Fetching Audit Trail.");
+		ObservableList<Book> auditTrail = FXCollections.observableArrayList();
+		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("select * from book_audit_trail order by book_id = ?");
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				Book book = new Book();
+				int pubID;
+				
+				book.setGateway(this);
+				book.setId(rs.getInt("id"));
+				book.setTitle(rs.getString("title"));
+				book.setSummary(rs.getString("summary"));
+				book.setYearPublished(rs.getInt("year_published"));
+				pubID = rs.getInt("publisher_id");
+				book.setPublisher(pubGateway.getPublisherById(pubID));
+				book.setIsbn(rs.getString("isbn"));
+				book.setDateAdded(rs.getDate("date_added").toLocalDate());
+				
+				auditTrail.add(book);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if (st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+		return null;
+	}
 	
 }
 

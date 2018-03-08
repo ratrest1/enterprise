@@ -146,7 +146,7 @@ public class BookGateway extends GatewayBase{
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("select title from book where title like ?");
+			st = conn.prepareStatement("select * from book where title like ?");
 			st.setString(1, "%" + searchStr + "%");
 			
 			ResultSet rs = st.executeQuery();
@@ -200,27 +200,22 @@ public class BookGateway extends GatewayBase{
 	
 	public ObservableList<AuditTrailEntry> getAuditTrail (int bookId) {
 		logger.info("Fetching Audit Trail.");
-		ObservableList<Book> auditTrail = FXCollections.observableArrayList();
+		ObservableList<AuditTrailEntry> auditTrail = FXCollections.observableArrayList();
 		
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("select * from book_audit_trail order by book_id = ?");
+			st.setInt(1, bookId);
+			
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
-				Book book = new Book();
-				int pubID;
+				AuditTrailEntry entry = new AuditTrailEntry();
 				
-				book.setGateway(this);
-				book.setId(rs.getInt("id"));
-				book.setTitle(rs.getString("title"));
-				book.setSummary(rs.getString("summary"));
-				book.setYearPublished(rs.getInt("year_published"));
-				pubID = rs.getInt("publisher_id");
-				book.setPublisher(pubGateway.getPublisherById(pubID));
-				book.setIsbn(rs.getString("isbn"));
-				book.setDateAdded(rs.getDate("date_added").toLocalDate());
+				entry.setId(rs.getInt("book_id"));
+				entry.setDateAdded(rs.getDate("date_added"));
+				entry.setMessage(rs.getString("entry_msg"));
 				
-				auditTrail.add(book);
+				auditTrail.add(entry);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

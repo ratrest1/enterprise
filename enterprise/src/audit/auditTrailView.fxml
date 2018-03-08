@@ -25,8 +25,8 @@
         </rowConstraints>
          <children>
             <Label fx:id="auditLabel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Back" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#OnBackClicked" text="Back" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ListView fx:id="auditList" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>

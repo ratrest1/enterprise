@@ -198,7 +198,7 @@ public class BookGateway extends GatewayBase{
 		deleteBook(tmp);
 	}
 	
-	public ObservableList<AuditTrailEntry> getAuditTrail (int bookId) {
+	public ObservableList<AuditTrailEntry> fetchAuditTrail (int bookId) {
 		logger.info("Fetching Audit Trail.");
 		ObservableList<AuditTrailEntry> auditTrail = FXCollections.observableArrayList();
 		
@@ -233,4 +233,3 @@ public class BookGateway extends GatewayBase{
 	}
 	
 }
-

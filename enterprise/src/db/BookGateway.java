@@ -25,6 +25,7 @@ public class BookGateway extends GatewayBase{
 	}
 	
 	public void createBook (Book book) throws AppException {
+		logger.info("Creating Book.");
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("insert into book( title, summary, year_published, isbn ) values( ?, ?, ?, ? )");
@@ -50,6 +51,7 @@ public class BookGateway extends GatewayBase{
 	
 	// add authors from database
 	public ObservableList<Book> readBook () throws AppException {
+		logger.info("Reading Book.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		
 		PreparedStatement st = null;
@@ -91,7 +93,9 @@ public class BookGateway extends GatewayBase{
 		logger.info("Updating Book.");
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("update book set isbn = ?, publisher_id = ?, year_published = ?, summary = ?, title = ? where id = ?");
+			st = conn.prepareStatement("update book set isbn = ?, "
+					+ "publisher_id = ?, year_published = ?, "
+					+ "summary = ?, title = ? where id = ?");
 			st.setString(1, book.getIsbn());
 			//st.setString(2, book.getPublisher());
 			st.setInt(3, book.getYearPublished());
@@ -115,6 +119,7 @@ public class BookGateway extends GatewayBase{
 	}
 
 	public void deleteBook (Book book) throws AppException {
+		logger.info("Deleting Book.");
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("delete from book where id = ?");
@@ -136,6 +141,7 @@ public class BookGateway extends GatewayBase{
 	}
 	
 	public ObservableList<Book> searchBook (String searchStr) {
+		logger.info("Searching for books.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		PreparedStatement st = null;
 		try {
@@ -190,6 +196,7 @@ public class BookGateway extends GatewayBase{
 		Book tmp = (Book) arg;
 		deleteBook(tmp);
 	}
+	
 	
 }
 

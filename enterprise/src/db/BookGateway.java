@@ -229,7 +229,7 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
-		return null;
+		return auditTrail;
 	}
 	
 }

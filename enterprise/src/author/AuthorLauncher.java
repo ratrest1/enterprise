@@ -32,13 +32,13 @@ public class AuthorLauncher extends Application{
 		loader.setStage(stage);
 		loader.LoadController(loader.AUT_LIST, null);
 	}
-	
+	/**
+	 * 		Initialize
+	 */
 	@Override
 	public void init() throws Exception {
 		super.init();
-		
-		logger.info("Creating connection...");
-		
+		logger.info("Creating connection...");	
 		try {
 			connection = ConnectionFactory.createConnection();
 			logger.info("Connection complete.");
@@ -48,7 +48,9 @@ public class AuthorLauncher extends Application{
 		}
 	}
 
-
+	/**
+	 * 		When the application stops
+	 */
 	@Override
 	public void stop() throws Exception {
 		super.stop();

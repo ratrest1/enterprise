@@ -35,7 +35,7 @@ public class AuthorListController extends ControllerBase implements Initializabl
     @FXML private Button addAuthorButton;
     
     private ObservableList<Author> authors;						//List of Authors
-    private Author selAuthor;
+    private Author selAuthor;									//Selected Author
     
     /**
      * 		Constructor
@@ -53,6 +53,10 @@ public class AuthorListController extends ControllerBase implements Initializabl
     	System.exit(0);
     }
     
+    /**
+     * 		When the user selects the Book List view.
+     * @param event
+     */
     @FXML
     void OnBookList(ActionEvent event) {
     	getLoader().LoadController(ControllerLoader.BOK_LIST, null);
@@ -73,12 +77,20 @@ public class AuthorListController extends ControllerBase implements Initializabl
     		}
     }
     
+    /**
+     * 		When the user hits the add author button.
+     * @param event
+     */
     @FXML
     void OnAddClicked(MouseEvent event) {
     	Author a = new Author();
 		getLoader().LoadController(ControllerLoader.AUT_DETAIL, a);
     }
     
+    /**
+     * 		When the user hits the delete author button.
+     * @param event
+     */
     @FXML
     void OnDeleteClicked(MouseEvent event) {
     	viewLocation.delete(selAuthor);

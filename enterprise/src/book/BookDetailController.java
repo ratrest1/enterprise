@@ -23,18 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.converter.NumberStringConverter;
 
 public class BookDetailController extends ControllerBase implements Initializable{
-
-    public BookDetailController(GatewayBase bookGateway, Book arg) {
-		super(bookGateway);
-		detailedBook = arg;
-		if( detailedBook.getId() == 0 ) {
-			viewType = 1;
-		}else {
-			viewType = 0;
-		}
-	}
-
-	@FXML private MenuItem authorMenu;
+	@FXML private MenuItem authorMenu;						//JavaFX stuff
     @FXML private MenuItem bookMenu;
     @FXML private MenuItem quitMenu;
     @FXML private Label firstName;
@@ -45,25 +34,55 @@ public class BookDetailController extends ControllerBase implements Initializabl
     @FXML private TextArea summary;
     @FXML private Button saveButton;
     
-    private Book detailedBook;								//Author class of the specified author
-    private int viewType;
-    
+    private Book detailedBook;								//Book class of the specified book
+    private int viewType;									//Whether the book is being created=1 or updated=0
 
+	/**
+	 * 		Constructor
+	 * @param bookGateway the gateway of the book
+	 * @param arg	the book being looked at
+	 */
+    public BookDetailController(GatewayBase bookGateway, Book arg) {
+		super(bookGateway);
+		detailedBook = arg;
+		if( detailedBook.getId() == 0 ) {
+			viewType = 1;
+		}else {
+			viewType = 0;
+		}
+	}
+
+    /**
+     * 		When the Author List menu button is pressed.
+     * @param event
+     */
     @FXML
     void OnAuthorClicked(ActionEvent event) {
     	getLoader().LoadController(getLoader().AUT_LIST, null);
     }
 
+    /**
+     * 		When the Book List menu button is pressed.
+     * @param event
+     */
     @FXML
     void OnBookClicked(ActionEvent event) {
     	getLoader().LoadController(getLoader().BOK_LIST, null);
     }
 
+    /**
+     * 		When the close menu button is pressed.
+     * @param event
+     */
     @FXML
     void OnCloseClicked(ActionEvent event) {
     	System.exit(0);
     }
 
+    /**
+     * 		When the Save Book button is pressed.
+     * @param event
+     */
     @FXML
     void OnSaveBookClicked(MouseEvent event) {
     	detailedBook.setGateway((BookGateway)this.viewLocation);
@@ -71,6 +90,9 @@ public class BookDetailController extends ControllerBase implements Initializabl
 		getLoader().LoadController(getLoader().BOK_LIST, null);
     }
     
+    /**
+     * 		When the view is initialized
+     */
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		title.textProperty().bindBidirectional(detailedBook.titleProperty());

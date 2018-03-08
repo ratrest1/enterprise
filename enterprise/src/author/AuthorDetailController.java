@@ -34,7 +34,7 @@ public class AuthorDetailController extends ControllerBase implements Initializa
     @FXML private DatePicker dob;
     
     private Author detailedAuthor;								//Author class of the specified author
-    private int viewType;
+    private int viewType;										//Whether or not the view is for Create =1  or Update =0 
     
     /**
      * 		Constructor
@@ -46,9 +46,7 @@ public class AuthorDetailController extends ControllerBase implements Initializa
 		detailedAuthor = arg;
 		if( detailedAuthor.getId() == 0 ) {
 			viewType = 1;
-			logger.info("CreateAuthor");
 		}else {
-			logger.info("UpdateAuthor");
 			viewType = 0;
 		}
 	}

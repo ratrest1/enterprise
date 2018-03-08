@@ -380,3 +380,162 @@
 14:29:56.475 INFO  author.AuthorLauncher : Creating connection...
 14:29:56.741 INFO  author.AuthorLauncher : Connection complete.
 14:30:17.744 INFO  author.AuthorLauncher : Closing connection...
+13:24:00.829 INFO  author.AuthorLauncher : Creating connection...
+13:24:02.114 INFO  author.AuthorLauncher : Connection complete.
+13:24:07.875 INFO  db.BookGateway : Reading Book.
+13:25:22.984 INFO  db.BookGateway : Creating Book.
+13:25:23.181 INFO  db.BookGateway : Reading Book.
+13:25:41.037 INFO  db.BookGateway : Updating Book.
+13:29:39.858 INFO  author.AuthorLauncher : Closing connection...
+13:29:45.685 INFO  author.AuthorLauncher : Creating connection...
+13:29:46.980 INFO  author.AuthorLauncher : Connection complete.
+13:29:50.770 INFO  db.BookGateway : Reading Book.
+13:30:06.370 INFO  db.BookGateway : Updating Book.
+13:30:06.573 INFO  db.BookGateway : Reading Book.
+13:30:12.328 INFO  db.BookGateway : Deleting Book.
+13:30:12.543 INFO  db.BookGateway : Reading Book.
+13:30:15.566 INFO  author.AuthorLauncher : Closing connection...
+13:31:30.010 INFO  author.AuthorLauncher : Creating connection...
+13:31:31.230 INFO  author.AuthorLauncher : Connection complete.
+13:31:35.864 INFO  db.BookGateway : Reading Book.
+13:31:44.030 INFO  author.AuthorLauncher : Closing connection...
+13:33:21.179 INFO  author.AuthorLauncher : Creating connection...
+13:33:22.435 INFO  author.AuthorLauncher : Connection complete.
+13:33:26.057 INFO  db.BookGateway : Reading Book.
+13:33:31.122 INFO  book.BookListController : pressed
+13:33:31.307 INFO  book.BookListController : Apressed
+13:33:31.435 INFO  book.BookListController : pressed
+13:33:35.750 INFO  book.BookListController :  pressed
+13:33:36.434 INFO  book.BookListController : pressed
+13:33:36.653 INFO  book.BookListController : Gpressed
+13:33:36.707 INFO  book.BookListController : pressed
+13:33:36.924 INFO  book.BookListController : apressed
+13:33:37.198 INFO  book.BookListController : mpressed
+13:33:37.412 INFO  book.BookListController : epressed
+13:33:43.051 INFO  author.AuthorLauncher : Closing connection...
+13:34:33.626 INFO  author.AuthorLauncher : Creating connection...
+13:34:34.845 INFO  author.AuthorLauncher : Connection complete.
+13:34:39.687 INFO  db.BookGateway : Reading Book.
+13:34:42.594 INFO  book.BookListController : 
+13:34:42.802 INFO  book.BookListController : 
+13:34:42.919 INFO  book.BookListController : a
+13:34:43.737 INFO  book.BookListController : a
+13:34:44.907 INFO  book.BookListController : a 
+13:34:45.028 INFO  book.BookListController : a
+13:34:45.251 INFO  book.BookListController : a
+13:34:46.014 INFO  book.BookListController : 
+13:34:46.728 INFO  book.BookListController : a
+13:34:46.797 INFO  book.BookListController : 
+13:34:46.809 INFO  book.BookListController : 
+13:34:47.638 INFO  book.BookListController : 
+13:34:49.005 INFO  book.BookListController : A
+13:34:50.126 INFO  book.BookListController : A 
+13:34:51.975 INFO  book.BookListController : A G
+13:34:53.677 INFO  book.BookListController : A 
+13:34:53.819 INFO  book.BookListController : A
+13:34:54.389 INFO  book.BookListController : AA
+13:34:55.016 INFO  book.BookListController : A
+13:34:56.086 INFO  book.BookListController : A 
+13:34:56.504 INFO  book.BookListController : A 
+13:34:57.386 INFO  book.BookListController : A 
+13:34:57.939 INFO  book.BookListController : A G
+13:34:58.211 INFO  book.BookListController : A G
+13:34:59.016 INFO  book.BookListController : A Ga
+13:34:59.157 INFO  book.BookListController : A Gam
+13:35:10.339 INFO  author.AuthorLauncher : Closing connection...
+13:41:30.648 INFO  author.AuthorLauncher : Creating connection...
+13:41:31.996 INFO  author.AuthorLauncher : Connection complete.
+13:41:35.267 INFO  db.BookGateway : Reading Book.
+13:41:38.933 INFO  db.BookGateway : Reading Book.
+13:41:39.386 INFO  db.BookGateway : Reading Book.
+13:41:39.848 INFO  db.BookGateway : Reading Book.
+13:41:40.304 INFO  db.BookGateway : Reading Book.
+13:41:40.806 INFO  db.BookGateway : Searching for books.
+13:41:40.938 INFO  db.BookGateway : Searching for books.
+13:41:41.058 INFO  db.BookGateway : Searching for books.
+13:41:41.179 INFO  db.BookGateway : Searching for books.
+13:41:41.309 INFO  db.BookGateway : Searching for books.
+13:41:41.431 INFO  db.BookGateway : Searching for books.
+13:42:20.351 INFO  author.AuthorLauncher : Creating connection...
+13:42:21.576 INFO  author.AuthorLauncher : Connection complete.
+13:42:25.464 INFO  db.BookGateway : Reading Book.
+13:42:27.590 INFO  db.BookGateway : Reading Book.
+13:42:28.047 INFO  db.BookGateway : Reading Book.
+13:42:28.507 INFO  db.BookGateway : Reading Book.
+13:42:30.151 INFO  db.BookGateway : Reading Book.
+13:42:32.347 INFO  db.BookGateway : Searching for books.
+13:42:32.666 INFO  db.BookGateway : Searching for books.
+13:42:32.782 INFO  db.BookGateway : Searching for books.
+13:47:03.804 INFO  author.AuthorLauncher : Creating connection...
+13:47:04.208 INFO  author.AuthorLauncher : Connection complete.
+13:47:07.239 INFO  db.BookGateway : Reading Book.
+13:47:09.258 INFO  db.BookGateway : Reading Book.
+13:47:09.849 INFO  db.BookGateway : Reading Book.
+13:47:10.349 INFO  db.BookGateway : Reading Book.
+13:47:11.157 INFO  db.BookGateway : Reading Book.
+13:47:12.425 INFO  db.BookGateway : Searching for books.
+13:47:12.779 INFO  db.BookGateway : Searching for books.
+13:47:13.121 INFO  db.BookGateway : Searching for books.
+13:47:15.965 INFO  db.BookGateway : Searching for books.
+13:47:16.196 INFO  db.BookGateway : Searching for books.
+13:47:16.324 INFO  db.BookGateway : Searching for books.
+13:47:18.232 INFO  db.BookGateway : Searching for books.
+13:47:18.735 INFO  db.BookGateway : Searching for books.
+13:47:18.961 INFO  db.BookGateway : Searching for books.
+13:47:19.191 INFO  db.BookGateway : Searching for books.
+13:47:19.419 INFO  db.BookGateway : Searching for books.
+13:47:19.772 INFO  db.BookGateway : Reading Book.
+13:47:20.241 INFO  db.BookGateway : Reading Book.
+13:47:20.691 INFO  db.BookGateway : Reading Book.
+13:47:21.137 INFO  db.BookGateway : Reading Book.
+13:47:21.627 INFO  db.BookGateway : Reading Book.
+13:47:22.087 INFO  db.BookGateway : Reading Book.
+13:47:22.538 INFO  db.BookGateway : Reading Book.
+13:47:24.580 INFO  db.BookGateway : Searching for books.
+13:47:24.924 INFO  db.BookGateway : Searching for books.
+13:47:25.268 INFO  db.BookGateway : Searching for books.
+13:47:25.506 INFO  db.BookGateway : Searching for books.
+13:47:25.740 INFO  db.BookGateway : Searching for books.
+13:47:25.976 INFO  db.BookGateway : Searching for books.
+13:47:26.205 INFO  db.BookGateway : Searching for books.
+13:47:31.325 INFO  db.BookGateway : Searching for books.
+13:47:31.826 INFO  db.BookGateway : Searching for books.
+13:47:32.054 INFO  db.BookGateway : Searching for books.
+13:47:32.283 INFO  db.BookGateway : Searching for books.
+13:47:32.509 INFO  db.BookGateway : Searching for books.
+13:47:32.731 INFO  db.BookGateway : Searching for books.
+13:47:33.077 INFO  db.BookGateway : Reading Book.
+13:47:33.539 INFO  db.BookGateway : Reading Book.
+13:47:33.990 INFO  db.BookGateway : Reading Book.
+13:47:34.649 INFO  db.BookGateway : Reading Book.
+13:47:35.099 INFO  db.BookGateway : Reading Book.
+13:47:35.548 INFO  db.BookGateway : Reading Book.
+13:47:35.999 INFO  db.BookGateway : Reading Book.
+13:47:36.446 INFO  db.BookGateway : Searching for books.
+13:47:36.792 INFO  db.BookGateway : Searching for books.
+13:47:37.031 INFO  db.BookGateway : Searching for books.
+13:47:37.257 INFO  db.BookGateway : Searching for books.
+13:47:37.484 INFO  db.BookGateway : Searching for books.
+13:47:37.710 INFO  db.BookGateway : Searching for books.
+13:47:42.279 INFO  db.BookGateway : Searching for books.
+13:47:42.778 INFO  db.BookGateway : Searching for books.
+13:47:43.003 INFO  db.BookGateway : Searching for books.
+13:47:43.227 INFO  db.BookGateway : Searching for books.
+13:47:43.454 INFO  db.BookGateway : Searching for books.
+13:47:43.794 INFO  db.BookGateway : Reading Book.
+13:47:44.265 INFO  db.BookGateway : Reading Book.
+13:47:47.129 INFO  author.AuthorLauncher : Closing connection...
+13:49:17.330 INFO  author.AuthorLauncher : Creating connection...
+13:49:18.636 INFO  author.AuthorLauncher : Connection complete.
+13:49:22.716 INFO  db.BookGateway : Reading Book.
+13:49:25.566 INFO  db.BookGateway : Reading Book.
+13:49:26.020 INFO  db.BookGateway : Reading Book.
+13:49:26.529 INFO  db.BookGateway : Reading Book.
+13:49:26.982 INFO  db.BookGateway : Reading Book.
+13:49:27.443 INFO  db.BookGateway : Searching for books.
+13:49:27.795 INFO  db.BookGateway : Searching for books.
+13:49:28.142 INFO  db.BookGateway : Searching for books.
+13:49:28.380 INFO  db.BookGateway : Searching for books.
+13:49:28.613 INFO  db.BookGateway : Searching for books.
+13:49:28.886 INFO  db.BookGateway : Searching for books.
+13:49:35.123 INFO  author.AuthorLauncher : Closing connection...

@@ -11,16 +11,19 @@ import javafx.beans.property.SimpleStringProperty;
 import publisher.Publisher;
 
 public class Book {
-	private BookGateway gateway;
+	private BookGateway gateway;							//Gateway to the book table
 	
-	private int id;
-	private SimpleStringProperty title;
-	private SimpleStringProperty summary;
-	private SimpleIntegerProperty yearPublished;
-	private SimpleObjectProperty<Publisher> publisher;
-	private SimpleStringProperty isbn;
-	private SimpleObjectProperty<LocalDate> dateAdded;
+	private int id;											//Book Id
+	private SimpleStringProperty title;						//Title of Book
+	private SimpleStringProperty summary;					//Summary of book
+	private SimpleIntegerProperty yearPublished;			//Year the book was publisher
+	private SimpleObjectProperty<Publisher> publisher;		//Publisher of the book
+	private SimpleStringProperty isbn;						//Isbn of the book
+	private SimpleObjectProperty<LocalDate> dateAdded;		//Date book was added to db
 	
+	/**
+	 * 		Constructor
+	 */
 	public Book() {
 		id = 0;
 		title = new SimpleStringProperty();
@@ -30,7 +33,11 @@ public class Book {
 		isbn = new SimpleStringProperty();
 		dateAdded = new SimpleObjectProperty<LocalDate>();
 	}
-	
+	/**
+	 * 		Saves the Book to the db
+	 * @param viewType Whether the book is being created=1 or updated=0
+	 * @return whether or not the book was successfully saved.
+	 */
 	public boolean saveBook(int viewType) {
 		if(id < 0) {
 			return false;

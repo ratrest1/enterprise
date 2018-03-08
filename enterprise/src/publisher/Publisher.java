@@ -3,13 +3,17 @@ package publisher;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Publisher {
-	int id;
-	SimpleStringProperty publisherName;
+	int id;									//Id of the publisher
+	SimpleStringProperty publisherName;		//Name of publisher
 	
+	/**
+	 * 		Constructor
+	 */
 	public Publisher() {
 		publisherName = new SimpleStringProperty();
 	}
 	
+	//Accessors
 	public Publisher( String s ) {
 		publisherName.set( s );
 	}

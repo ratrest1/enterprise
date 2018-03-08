@@ -33,6 +33,7 @@ public class BookDetailController extends ControllerBase implements Initializabl
     @FXML private TextField yrPublished;
     @FXML private TextArea summary;
     @FXML private Button saveButton;
+    @FXML private Button auditTrailButton;
     
     private Book detailedBook;								//Book class of the specified book
     private int viewType;									//Whether the book is being created=1 or updated=0
@@ -88,6 +89,15 @@ public class BookDetailController extends ControllerBase implements Initializabl
     	detailedBook.setGateway((BookGateway)this.viewLocation);
 		detailedBook.saveBook( viewType );
 		getLoader().LoadController(getLoader().BOK_LIST, null);
+    }
+    
+    /**
+     * 		When the Audit Trail button is clicked.
+     * @param event
+     */
+    @FXML
+    void OnAuditClicked(MouseEvent event) {
+
     }
     
     /**

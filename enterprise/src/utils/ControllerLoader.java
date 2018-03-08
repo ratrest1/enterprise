@@ -30,6 +30,7 @@ public class ControllerLoader {
 	public static final int AUT_DETAIL = 2;
 	public static final int BOK_LIST = 3;
 	public static final int BOK_DETAIL = 4;
+	public static final int AUD_ENTRY = 5;
 	
 	private Connection connection;
 	private static Logger logger = LogManager.getLogger();		//Logger

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import utils.ControllerBase;
 import utils.GatewayBase;
@@ -20,6 +21,7 @@ public class AuditTrailController extends ControllerBase implements Initializabl
 		currBook = b;
 	}
 
+	@FXML private ListView<AuditTrailEntry> auditList;
 	@FXML private Label auditLabel;
     @FXML private Button backButton;
 
@@ -30,7 +32,10 @@ public class AuditTrailController extends ControllerBase implements Initializabl
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		/**
+		 *  RIGHT HERE CLAYTON
+		 */
+		//auditList.populate( auditGateway.getAudits() );
 		
 	}
 }

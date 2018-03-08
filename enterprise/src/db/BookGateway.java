@@ -48,6 +48,7 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		createEntry(book.getTitle());
 	}
 	
 	// add authors from database
@@ -117,6 +118,7 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		updateEntry(book);
 	}
 
 	public void deleteBook (Book book) throws AppException {
@@ -198,7 +200,108 @@ public class BookGateway extends GatewayBase{
 		deleteBook(tmp);
 	}
 	
-	public ObservableList<AuditTrailEntry> fetchAuditTrail (int bookId) {
+	/**
+	 *    createEntry : This method creates an entry when CreateBook is called
+	 */
+	private void createEntry (String title) throws AppException {
+		PreparedStatement st = null;
+		// get book's id
+		try {
+			st = conn.prepareStatement("select * from book where title = ?");
+			st.setString(1, title);
+			ResultSet rs = st.executeQuery();
+			
+			Book book = new Book();
+			book.setId(rs.getInt("id"));
+			
+			createAuditTrailEntry(book.getId(), "Book Created.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+	}
+	
+	/**
+	 * updateEntry : This method creates an entry when UpdateBook is called
+	 */
+	private void updateEntry (Book oBook) throws AppException {
+		Book nBook = new Book();
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("select * from book where id = ?");
+			st.setInt(1, oBook.getId());
+			ResultSet rs = st.executeQuery();
+			
+			nBook.setId(rs.getInt("id"));
+			nBook.setTitle(rs.getString("title"));
+			nBook.setSummary(rs.getString("summary"));
+			nBook.setYearPublished(rs.getInt("year_published"));
+			nBook.setIsbn(rs.getString("isbn"));
+			nBook.setDateAdded(rs.getDate("date_added").toLocalDate());
+			
+			if ( !nBook.getTitle().equals(oBook.getTitle()) )
+				createAuditTrailEntry(nBook.getId(), "title changed from " + oBook.getTitle() + "to " + nBook.getTitle());
+			
+			if ( !nBook.getSummary().equals(oBook.getSummary()) )
+				createAuditTrailEntry(nBook.getId(), "Summary changed.");
+			
+			if (nBook.getYearPublished() != oBook.getYearPublished()) {
+				createAuditTrailEntry(nBook.getId(), "year_published changed from " 
+						+ oBook.getYearPublished() + "to " + nBook.getYearPublished());
+			}
+			
+			if (nBook.getIsbn() != oBook.getIsbn())
+				createAuditTrailEntry(nBook.getId(), "isbn changed from " + oBook.getIsbn() + "to " + nBook.getIsbn());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+	}
+	
+	/**
+	 * createAuditTrailEntry : called by the above 2 functions and creates an audit trail entry in the db
+	 */
+	public void createAuditTrailEntry (int bookId, String message) throws AppException {
+		logger.info("Creating Audit Trail Entry.");
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("insert into book_audit_trail ( book_id, entry_msg ) values ( ?, ? )");
+			st.setInt(1, bookId);
+			st.setString(2, message);
+			
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+	}
+	
+	public ObservableList<AuditTrailEntry> fetchAuditTrail (int bookId) throws AppException {
 		logger.info("Fetching Audit Trail.");
 		ObservableList<AuditTrailEntry> auditTrail = FXCollections.observableArrayList();
 		

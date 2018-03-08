@@ -35,7 +35,6 @@ public class AuditTrailController extends ControllerBase implements Initializabl
 		/**
 		 *  RIGHT HERE CLAYTON
 		 */
-		//auditList.populate( auditGateway.getAudits() );
-		
+		//auditList.setItems( bookGateway.getAudits() );
 	}
 }

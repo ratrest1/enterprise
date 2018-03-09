@@ -96,6 +96,7 @@ public class BookGateway extends GatewayBase{
 		logger.info("Updating Book...");
 		PreparedStatement st = null;
 		try {
+			updateEntry(book);
 			st = conn.prepareStatement("update book set isbn = ?, "
 					+ "publisher_id = ?, year_published = ?, "
 					+ "summary = ?, title = ? where id = ?");
@@ -119,11 +120,11 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
-		//updateEntry(oldBook);
 		logger.info("Book Updated.");
 	}
 
 	public void deleteBook (Book book) throws AppException {
+		// delete book
 		logger.info("Deleting Book...");
 		PreparedStatement st = null;
 		try {
@@ -144,6 +145,26 @@ public class BookGateway extends GatewayBase{
 			}
 		}
 		logger.info("Book Deleted.");
+		
+		// delete audit trail
+		st = null;
+		try {
+			st = conn.prepareStatement("delete from book_audit_trail where book_id = ?");
+			st.setLong(1, book.getId());
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+		
 	}
 	
 	public ObservableList<Book> searchBook (String searchStr) {

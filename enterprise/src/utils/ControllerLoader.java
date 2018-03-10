@@ -11,6 +11,7 @@ import java.sql.Connection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import audit.AuditTrailController;
 import author.Author;
 import author.AuthorDetailController;
 import author.AuthorListController;
@@ -81,6 +82,10 @@ public class ControllerLoader {
 				case BOK_DETAIL:
 					fxmlFile = this.getClass().getResource("../book/BookDetailView.fxml");
 					controller = new BookDetailController(new BookGateway(connection),(Book) arg);
+					break;
+				case AUD_ENTRY:
+					fxmlFile = this.getClass().getResource("../audit/auditTrailView.fxml"); 
+					controller = new AuditTrailController(new BookGateway(connection),(Book) arg);
 					break;
 			}
 		

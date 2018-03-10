@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import book.Book;
+import db.BookGateway;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,7 +17,7 @@ import utils.GatewayBase;
 public class AuditTrailController extends ControllerBase implements Initializable{
 
 	Book currBook;
-	protected AuditTrailController(GatewayBase auditGateway, Book b) {
+	public AuditTrailController(GatewayBase auditGateway, Book b) {
 		super(auditGateway);
 		currBook = b;
 	}
@@ -32,9 +33,9 @@ public class AuditTrailController extends ControllerBase implements Initializabl
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		/**
-		 *  RIGHT HERE CLAYTON
-		 */
-		//auditList.setItems( auditGateway.fetchAuditTrail() );
+		BookGateway bg = (BookGateway) this.viewLocation;
+		auditList.setItems( bg.fetchAuditTrail(currBook.getId()) );
+		auditLabel.setText("Audit Trail for " + currBook.getTitle());
+		
 	}
 }

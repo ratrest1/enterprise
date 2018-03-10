@@ -28,4 +28,8 @@ public class AuditTrailEntry {
 		this.message = message;
 	}
 	
+	public String toString() {
+		return dateAdded + ": " + message;
+	}
+	
 }

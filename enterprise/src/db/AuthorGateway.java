@@ -171,7 +171,6 @@ public class AuthorGateway extends GatewayBase{
 		deleteAuthor(tmp);
 	}
 	
-	// -------------------------------------------NEW STUFF---------------------------------------------------- //
 	/**
 	 *    createEntry : This method creates an entry when CreateAuthor is called
 	 */

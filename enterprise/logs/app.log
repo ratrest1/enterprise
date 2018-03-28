@@ -714,3 +714,6 @@
 14:56:39.125 INFO  db.AuthorGateway : Updating.
 14:56:39.203 INFO  db.AuthorGateway : Created Audit Trail Entry.
 14:56:39.204 INFO  db.AuthorGateway : Martin
+15:02:22.835 INFO  db.AuthorGateway : Created Audit Trail Entry.
+15:02:22.838 INFO  db.AuthorGateway : Author Created.
+15:02:29.292 INFO  author.AuthorLauncher : Closing connection...

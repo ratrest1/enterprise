@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import audit.BookAuditTrailEntry;
+import audit.AuditTrailEntry;
 import utils.AppException;
 import utils.GatewayBase;
 import book.Book;
@@ -329,9 +329,9 @@ public class BookGateway extends GatewayBase{
 		logger.info("Created Audit Trail Entry.");
 	}
 	
-	public ObservableList<BookAuditTrailEntry> fetchAuditTrail (int bookId) throws AppException {
+	public ObservableList<AuditTrailEntry> fetchAuditTrail (int bookId) throws AppException {
 		logger.info("Fetching Audit Trail...");
-		ObservableList<BookAuditTrailEntry> auditTrail = FXCollections.observableArrayList();
+		ObservableList<AuditTrailEntry> auditTrail = FXCollections.observableArrayList();
 		
 		PreparedStatement st = null;
 		try {
@@ -340,7 +340,7 @@ public class BookGateway extends GatewayBase{
 			
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
-				BookAuditTrailEntry entry = new BookAuditTrailEntry();
+				AuditTrailEntry entry = new AuditTrailEntry();
 				
 				entry.setId(rs.getInt("book_id"));
 				entry.setDateAdded(rs.getDate("date_added"));

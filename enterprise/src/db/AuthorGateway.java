@@ -48,6 +48,8 @@ public class AuthorGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		createEntry(author.getfName(), author.getlName());
+		logger.info("Author Created.");
 	}
 	
 	// add authors from database
@@ -87,6 +89,7 @@ public class AuthorGateway extends GatewayBase{
 		logger.info("Updating.");
 		PreparedStatement st = null;
 		try {
+			updateEntry(author);
 			st = conn.prepareStatement("update author set website = ?, gender = ?, dob = ?, last_name = ?, first_name = ? where id = ?");
 			st.setString(1, author.getWebsite());
 			st.setString(2, author.getGender());
@@ -130,6 +133,25 @@ public class AuthorGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		
+		// delete audit trail
+				st = null;
+				try {
+					st = conn.prepareStatement("delete from author_audit_trail where author_id = ?");
+					st.setLong(1, author.getId());
+					st.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					throw new AppException(e);
+				} finally {
+					try {
+						if(st != null)
+							st.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						throw new AppException(e);
+					}
+				}
 	}
 
 	@Override
@@ -185,21 +207,21 @@ public class AuthorGateway extends GatewayBase{
 	/**
 	 * updateEntry : This method creates an entry when UpdateBook is called
 	 */
-	private void updateEntry (Author oAuthor) throws AppException {
-		Author nAuthor = new Author();
+	private void updateEntry (Author nAuthor) throws AppException {
+		Author oAuthor = new Author();
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("select * from author where id = ?");
-			st.setInt(1, oAuthor.getId());
+			st.setInt(1, nAuthor.getId());
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
-				nAuthor.setId(rs.getInt("id"));
-				nAuthor.setfName(rs.getString("first_name"));
-				nAuthor.setlName(rs.getString("last_name"));
-				nAuthor.setDateOfBirth(rs.getDate("dob").toLocalDate());
-				nAuthor.setGender(rs.getString("gender"));
-				nAuthor.setWebsite(rs.getString("website"));
+				oAuthor.setId(rs.getInt("id"));
+				oAuthor.setfName(rs.getString("first_name"));
+				oAuthor.setlName(rs.getString("last_name"));
+				oAuthor.setDateOfBirth(rs.getDate("dob").toLocalDate());
+				oAuthor.setGender(rs.getString("gender"));
+				oAuthor.setWebsite(rs.getString("website"));
 			}
 			
 			if ( !nAuthor.getfName().equals(oAuthor.getfName()) ) {
@@ -212,7 +234,7 @@ public class AuthorGateway extends GatewayBase{
 				+ oAuthor.getfName() + " to " + nAuthor.getfName());
 			}
 			
-			if (nAuthor.getDateOfBirth() != oAuthor.getDateOfBirth()) {
+			if (!nAuthor.getDateOfBirth().toString().equals(oAuthor.getDateOfBirth().toString())) {
 				createAuditTrailEntry(nAuthor.getId(), "dob changed from " 
 				+ oAuthor.getDateOfBirth() + " to " + nAuthor.getDateOfBirth());
 			}

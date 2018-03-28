@@ -258,21 +258,21 @@ public class BookGateway extends GatewayBase{
 	/**
 	 * updateEntry : This method creates an entry when UpdateBook is called
 	 */
-	private void updateEntry (Book oBook) throws AppException {
-		Book nBook = new Book();
+	private void updateEntry (Book nBook) throws AppException {
+		Book oBook = new Book();
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("select * from book where id = ?");
-			st.setInt(1, oBook.getId());
+			st.setInt(1, nBook.getId());
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
-				nBook.setId(rs.getInt("id"));
-				nBook.setTitle(rs.getString("title"));
-				nBook.setSummary(rs.getString("summary"));
-				nBook.setYearPublished(rs.getInt("year_published"));
-				nBook.setIsbn(rs.getString("isbn"));
-				nBook.setDateAdded(rs.getDate("date_added").toLocalDate());
+				oBook.setId(rs.getInt("id"));
+				oBook.setTitle(rs.getString("title"));
+				oBook.setSummary(rs.getString("summary"));
+				oBook.setYearPublished(rs.getInt("year_published"));
+				oBook.setIsbn(rs.getString("isbn"));
+				oBook.setDateAdded(rs.getDate("date_added").toLocalDate());
 			}
 			
 			if ( !nBook.getTitle().equals(oBook.getTitle()) )

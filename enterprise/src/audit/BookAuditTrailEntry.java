@@ -3,7 +3,7 @@ package audit;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class AuditTrailEntry {
+public class BookAuditTrailEntry {
 	int id;				//Id of the book
 	Date dateAdded;		//When the audit trail entry was added
 	String message;		//The message in the audit trail entry

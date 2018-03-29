@@ -2,7 +2,9 @@ package book;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 
+import authorBook.AuthorBook;
 import db.AuthorGateway;
 import db.BookGateway;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -68,7 +70,15 @@ public class Book {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * 	getAuthors
+	 */
+	public List<AuthorBook> getAuthors(){
+		//TODO: Use BookGateway to get list also throw exception if something happens
+		return null;
+	}
+	
 	//Accessors
 	public String toString() {
 		return title.get();

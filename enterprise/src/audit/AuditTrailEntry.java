@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class AuditTrailEntry {
-	int id;				//Id of the book
+	int id;				//Id of the book/author
 	Date dateAdded;		//When the audit trail entry was added
 	String message;		//The message in the audit trail entry
 	

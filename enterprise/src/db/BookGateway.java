@@ -96,6 +96,7 @@ public class BookGateway extends GatewayBase{
 		logger.info("Updating Book...");
 		PreparedStatement st = null;
 		try {
+			updateEntry(book);
 			st = conn.prepareStatement("update book set isbn = ?, "
 					+ "publisher_id = ?, year_published = ?, "
 					+ "summary = ?, title = ? where id = ?");
@@ -119,11 +120,11 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
-		//updateEntry(oldBook);
 		logger.info("Book Updated.");
 	}
 
 	public void deleteBook (Book book) throws AppException {
+		// delete book
 		logger.info("Deleting Book...");
 		PreparedStatement st = null;
 		try {
@@ -144,6 +145,26 @@ public class BookGateway extends GatewayBase{
 			}
 		}
 		logger.info("Book Deleted.");
+		
+		// delete audit trail
+		st = null;
+		try {
+			st = conn.prepareStatement("delete from book_audit_trail where book_id = ?");
+			st.setLong(1, book.getId());
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+		
 	}
 	
 	public ObservableList<Book> searchBook (String searchStr) {
@@ -237,21 +258,21 @@ public class BookGateway extends GatewayBase{
 	/**
 	 * updateEntry : This method creates an entry when UpdateBook is called
 	 */
-	private void updateEntry (Book oBook) throws AppException {
-		Book nBook = new Book();
+	private void updateEntry (Book nBook) throws AppException {
+		Book oBook = new Book();
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("select * from book where id = ?");
-			st.setInt(1, oBook.getId());
+			st.setInt(1, nBook.getId());
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
-				nBook.setId(rs.getInt("id"));
-				nBook.setTitle(rs.getString("title"));
-				nBook.setSummary(rs.getString("summary"));
-				nBook.setYearPublished(rs.getInt("year_published"));
-				nBook.setIsbn(rs.getString("isbn"));
-				nBook.setDateAdded(rs.getDate("date_added").toLocalDate());
+				oBook.setId(rs.getInt("id"));
+				oBook.setTitle(rs.getString("title"));
+				oBook.setSummary(rs.getString("summary"));
+				oBook.setYearPublished(rs.getInt("year_published"));
+				oBook.setIsbn(rs.getString("isbn"));
+				oBook.setDateAdded(rs.getDate("date_added").toLocalDate());
 			}
 			
 			if ( !nBook.getTitle().equals(oBook.getTitle()) )

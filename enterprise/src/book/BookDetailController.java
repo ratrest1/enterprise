@@ -97,7 +97,7 @@ public class BookDetailController extends ControllerBase implements Initializabl
      */
     @FXML
     void OnAuditClicked(MouseEvent event) {
-    	getLoader().LoadController(getLoader().AUD_ENTRY, detailedBook);
+    	getLoader().LoadController(getLoader().BOK_AUDIT, detailedBook);
     }
     
     /**

@@ -14,20 +14,21 @@ import javafx.scene.input.MouseEvent;
 import utils.ControllerBase;
 import utils.GatewayBase;
 
-public class AuditTrailController extends ControllerBase implements Initializable{
+public class BookAuditTrailController extends ControllerBase implements Initializable{
 
 	Book currBook;
-	public AuditTrailController(GatewayBase auditGateway, Book b) {
-		super(auditGateway);
-		currBook = b;
-	}
-
 	@FXML private ListView<AuditTrailEntry> auditList;
 	@FXML private Label auditLabel;
     @FXML private Button backButton;
 
+    public BookAuditTrailController(GatewayBase auditGateway, Book b) {
+		super(auditGateway);
+		currBook = b;
+	}
+    
     @FXML
     void OnBackClicked(MouseEvent event) {
+    	
     	getLoader().LoadController(getLoader().BOK_DETAIL, currBook);
     }
 

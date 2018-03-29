@@ -32,6 +32,7 @@ public class AuthorDetailController extends ControllerBase implements Initializa
     @FXML private TextField website;
     @FXML private Button saveButton;
     @FXML private DatePicker dob;
+    @FXML private Button auditTrailButton;
     
     private Author detailedAuthor;								//Author class of the specified author
     private int viewType;										//Whether or not the view is for Create =1  or Update =0 
@@ -76,6 +77,15 @@ public class AuthorDetailController extends ControllerBase implements Initializa
 		detailedAuthor.setGateway((AuthorGateway)this.viewLocation);
 		detailedAuthor.saveAuthor( viewType );
 		getLoader().LoadController(getLoader().AUT_LIST, null);
+    }
+	
+	/**
+     * 		When the Audit Trail button is clicked.
+     * @param event
+     */
+    @FXML
+    void OnAuditClicked(MouseEvent event) {
+    	getLoader().LoadController(getLoader().AUT_AUDIT, detailedAuthor);
     }
 
 	/**

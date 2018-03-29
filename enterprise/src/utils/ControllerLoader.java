@@ -11,7 +11,8 @@ import java.sql.Connection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import audit.AuditTrailController;
+import audit.AuthorAuditTrailController;
+import audit.BookAuditTrailController;
 import author.Author;
 import author.AuthorDetailController;
 import author.AuthorListController;
@@ -29,9 +30,12 @@ import javafx.stage.Stage;
 public class ControllerLoader {
 	public static final int AUT_LIST = 1;
 	public static final int AUT_DETAIL = 2;
-	public static final int BOK_LIST = 3;
-	public static final int BOK_DETAIL = 4;
-	public static final int AUD_ENTRY = 5;
+	public static final int AUT_AUDIT = 3;
+	
+	public static final int BOK_LIST = 4;
+	public static final int BOK_DETAIL = 5;
+	public static final int BOK_AUDIT = 6;
+	
 	
 	private Connection connection;
 	private static Logger logger = LogManager.getLogger();		//Logger
@@ -75,6 +79,10 @@ public class ControllerLoader {
 					fxmlFile = this.getClass().getResource("../author/AuthorDetailView.fxml");
 					controller = new AuthorDetailController(new AuthorGateway(connection),(Author) arg);
 					break;
+				case AUT_AUDIT:
+					fxmlFile = this.getClass().getResource("../audit/authorAuditTrailView.fxml"); 
+					controller = new AuthorAuditTrailController(new AuthorGateway(connection),(Author) arg);
+					break;
 				case BOK_LIST:
 					fxmlFile = this.getClass().getResource("../book/BookListView.fxml");
 					controller = new BookListController(new BookGateway(connection));
@@ -83,9 +91,9 @@ public class ControllerLoader {
 					fxmlFile = this.getClass().getResource("../book/BookDetailView.fxml");
 					controller = new BookDetailController(new BookGateway(connection),(Book) arg);
 					break;
-				case AUD_ENTRY:
-					fxmlFile = this.getClass().getResource("../audit/auditTrailView.fxml"); 
-					controller = new AuditTrailController(new BookGateway(connection),(Book) arg);
+				case BOK_AUDIT:
+					fxmlFile = this.getClass().getResource("../audit/bookAuditTrailView.fxml"); 
+					controller = new BookAuditTrailController(new BookGateway(connection),(Book) arg);
 					break;
 			}
 		

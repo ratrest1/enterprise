@@ -14,7 +14,7 @@ import utils.GatewayBase;
 import book.Book;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+//
 public class BookGateway extends GatewayBase{
 	private static Logger logger = LogManager.getLogger();		//Logger
 	private Connection conn;

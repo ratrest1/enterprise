@@ -1,5 +1,6 @@
 package db;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -226,6 +227,8 @@ public class BookGateway extends GatewayBase{
 		deleteBook(tmp);
 	}
 	
+	//-----------------------------------------AUTHORBOOK RELATIONSHIP-----------------------------------------------------
+	
 	/**
 	 * GetAuthorsForBook : gets all authors for a specific book
 	 */
@@ -296,6 +299,34 @@ public class BookGateway extends GatewayBase{
 			}
 		}
 	}
+	
+	/**
+	 * CreateAuthorBookRecord : creates an AuthorBook record as specified by user
+	 */
+	void CreateAuthorBookRecord (int authorId, int bookId, int royalty) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("insert into author_book( author_id, book_id, royalty ) values( ?, ?, ? )");
+			st.setInt(1, authorId);
+			st.setInt(2, bookId);
+			st.setInt(3, royalty / 100000);
+			
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+	}
+	
+	//---------------------------------------------AUDIT TRAIL------------------------------------------------------------
 	
 	/**
 	 *    createEntry : This method creates an entry when CreateBook is called

@@ -9,6 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import audit.AuditTrailEntry;
+import author.Author;
+import authorBook.AuthorBook;
 import utils.AppException;
 import utils.GatewayBase;
 import book.Book;
@@ -222,6 +224,77 @@ public class BookGateway extends GatewayBase{
 	public void delete(Object arg) {
 		Book tmp = (Book) arg;
 		deleteBook(tmp);
+	}
+	
+	/**
+	 * GetAuthorsForBook : gets all authors for a specific book
+	 */
+	public ObservableList<AuthorBook> GetAuthorsForBook (Book book) {
+		ObservableList<AuthorBook> authorBooks = FXCollections.observableArrayList();
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("select * from author_book where book_id = ?");
+			st.setInt(1, book.getId());
+			
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				AuthorBook authorBook = new AuthorBook();
+				int authorId;
+				
+				authorId = rs.getInt("author_id");
+				authorBook.setMyAut(GetAuthorById(authorId));
+				authorBook.setMyBook(book);
+				authorBook.setRoyalty(rs.getInt("royalty") * 100000);
+				
+				authorBooks.add(authorBook);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+		return authorBooks;
+	}
+	
+	/**
+	 * GetAuthorById : gets a specific author by Id
+	 */
+	
+	public Author GetAuthorById (int authorId) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("select * from author where id = ?");
+			st.setInt(1, authorId);
+			
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			Author author = new Author(rs.getString("first_name"), rs.getString("last_name"));
+				
+			author.setId(rs.getInt("id"));
+			author.setDateOfBirth(rs.getDate("dob").toLocalDate());
+			author.setGender(rs.getString("gender"));
+			author.setWebsite(rs.getString("website"));
+				
+			return author;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
 	}
 	
 	/**

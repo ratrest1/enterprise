@@ -127,8 +127,8 @@ public class BookGateway extends GatewayBase{
 	}
 
 	public void deleteBook (Book book) throws AppException {
-		// delete book
 		logger.info("Deleting Book...");
+		DeleteAuthorBookRecord(book.getId());
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("delete from book where id = ?");
@@ -167,7 +167,6 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
-		
 	}
 	
 	public ObservableList<Book> searchBook (String searchStr) {
@@ -310,6 +309,30 @@ public class BookGateway extends GatewayBase{
 			st.setInt(1, authorId);
 			st.setInt(2, bookId);
 			st.setInt(3, royalty / 100000);
+			
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+	}
+	
+	/**
+	 * DeleteAuthorBookRecord : deletes corresponding AuthorBook records of a book upon deletion
+	 */
+	void DeleteAuthorBookRecord (int bookId) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("delete from author_book where book_id = ?");
+			st.setInt(1, bookId);
 			
 			st.executeUpdate();
 		} catch (SQLException e) {

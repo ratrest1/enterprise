@@ -356,7 +356,6 @@ public class BookGateway extends GatewayBase{
 	 */
 	private void createEntry (String title) throws AppException {
 		PreparedStatement st = null;
-		// get book's id
 		try {
 			st = conn.prepareStatement("select * from book where title = ?");
 			st.setString(1, title);

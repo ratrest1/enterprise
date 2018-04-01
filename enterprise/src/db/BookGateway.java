@@ -255,8 +255,8 @@ public class BookGateway extends GatewayBase{
 				authorId = rs.getInt("author_id");
 				authorBook.setMyAut(GetAuthorById(authorId));
 				authorBook.setMyBook(book);
-				BigDecimal num = rs.getBigDecimal("royalty");
-				authorBook.setRoyalty( num.multiply(new BigDecimal(100000)) );
+				//BigDecimal num = rs.getBigDecimal("royalty");
+				//authorBook.setRoyalty( num.multiply(new BigDecimal(100000)) );
 				
 				authorBooks.add(authorBook);
 			}

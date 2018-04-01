@@ -24,7 +24,7 @@ public class AuthorBook {
 	public void setMyBook(Book myBook) {
 		this.myBook = myBook;
 	}
-	public int getRoyalty() {
+	public BigDecimal getRoyalty() {
 		return royalty;
 	}
 	public void setRoyalty(int royalty) {

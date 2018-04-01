@@ -1,6 +1,7 @@
 package book;
 
 import publisher.Publisher;
+import authorBook.AuthorBook;
 import utils.ControllerBase;
 import utils.GatewayBase;
 
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -34,6 +36,9 @@ public class BookDetailController extends ControllerBase implements Initializabl
     @FXML private TextArea summary;
     @FXML private Button saveButton;
     @FXML private Button auditTrailButton;
+    @FXML private Button addAuthor;
+    @FXML private Button delAuthor;
+    @FXML private ListView<AuthorBook> authorList;
     
     private Book detailedBook;								//Book class of the specified book
     private int viewType;									//Whether the book is being created=1 or updated=0
@@ -111,8 +116,8 @@ public class BookDetailController extends ControllerBase implements Initializabl
 		BookGateway bg =  (BookGateway) this.viewLocation;
 		pubCombo.setItems( bg.pubGateway.getPublishers() );
 		pubCombo.setValue(detailedBook.getPublisher());
-		//pubCombo.textProperty().bindBidirectional(detailedBook.genderProperty());
 		Isbn.textProperty().bindBidirectional(detailedBook.isbnProperty());
+		authorList.setItems( bg.GetAuthorsForBook(detailedBook) );
 	}
 
 }

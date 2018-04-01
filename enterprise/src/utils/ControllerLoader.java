@@ -70,6 +70,8 @@ public class ControllerLoader {
 		try {
 			ControllerBase controller = null;
 			URL fxmlFile = null;
+			int wPos = 600;
+			int hPos = 400;
 			switch(viewType) {
 				case AUT_LIST:
 					fxmlFile = this.getClass().getResource("../author/AuthorListView.fxml");
@@ -90,18 +92,18 @@ public class ControllerLoader {
 				case BOK_DETAIL:
 					fxmlFile = this.getClass().getResource("../book/BookDetailView.fxml");
 					controller = new BookDetailController(new BookGateway(connection),(Book) arg);
+					wPos = 900;
+					hPos = 600;
 					break;
 				case BOK_AUDIT:
 					fxmlFile = this.getClass().getResource("../audit/bookAuditTrailView.fxml"); 
 					controller = new BookAuditTrailController(new BookGateway(connection),(Book) arg);
 					break;
 			}
-		
 			FXMLLoader loader = new FXMLLoader(fxmlFile);
 			loader.setController(controller);
-		
 			Parent viewNode = loader.load();
-			Scene scene = new Scene(viewNode,600,400);
+			Scene scene = new Scene(viewNode,wPos,hPos);
 			stage.setScene(scene);
 			stage.setTitle("Book List");
 			stage.show();

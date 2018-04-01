@@ -226,7 +226,15 @@ public class BookGateway extends GatewayBase{
 		deleteBook(tmp);
 	}
 	
-	//-----------------------------------------AUTHORBOOK RELATIONSHIP-----------------------------------------------------
+	
+	
+	
+	
+//-------------------------------------------AUTHORBOOK RELATIONSHIP-----------------------------------------------------//
+	
+	
+	
+	
 	
 	/**
 	 * GetAuthorsForBook : gets all authors for a specific book
@@ -246,7 +254,7 @@ public class BookGateway extends GatewayBase{
 				authorId = rs.getInt("author_id");
 				authorBook.setMyAut(GetAuthorById(authorId));
 				authorBook.setMyBook(book);
-				authorBook.setRoyalty(rs.getInt("royalty") * 100000);
+				//authorBook.setRoyalty(rs.getBigDecimal("royalty") * 100000);
 				
 				authorBooks.add(authorBook);
 			}
@@ -302,7 +310,7 @@ public class BookGateway extends GatewayBase{
 	/**
 	 * CreateAuthorBookRecord : creates an AuthorBook record as specified by user
 	 */
-	void CreateAuthorBookRecord (int authorId, int bookId, int royalty) {
+	public void CreateAuthorBookRecord (int authorId, int bookId, int royalty) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("insert into author_book( author_id, book_id, royalty ) values( ?, ?, ? )");
@@ -323,12 +331,40 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		createAuditTrailEntry(bookId, "");
+	}
+	
+	/**
+	 * UpdateAuthorBookRecord : Updates an AuthorBook record
+	 */
+	public void UpdateRoyalty (AuthorBook AB) {
+		logger.info("Updating Book...");
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("update AuthorBook set royalty = ? where author_id = ? and book_id = ?");
+			//st.setBigDecimal(1, AB.getRoyalty() / 100000);
+			st.setInt(2, AB.getMyAut().getId());
+			st.setInt(3, AB.getMyBook().getId());
+			
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
 	}
 	
 	/**
 	 * DeleteAuthorBookRecord : deletes corresponding AuthorBook records of a book upon deletion
 	 */
-	void DeleteAuthorBookRecord (int bookId) {
+	public void DeleteAuthorBookRecord (int bookId) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("delete from author_book where book_id = ?");
@@ -347,9 +383,18 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		createAuditTrailEntry(bookId, "Author deleted from book.");
 	}
 	
-	//---------------------------------------------AUDIT TRAIL------------------------------------------------------------
+	
+	
+	
+	
+//-------------------------------------------------AUDIT TRAIL----------------------------------------------------------//
+	
+	
+	
+	
 	
 	/**
 	 *    createEntry : This method creates an entry when CreateBook is called

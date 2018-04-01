@@ -27,7 +27,7 @@ public class AuthorBook {
 	public BigDecimal getRoyalty() {
 		return royalty;
 	}
-	public void setRoyalty(int royalty) {
+	public void setRoyalty(BigDecimal royalty) {
 		this.royalty = royalty;
 	}
 	public boolean isNewRecord() {

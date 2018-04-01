@@ -239,7 +239,7 @@ public class BookGateway extends GatewayBase{
 	/**
 	 * GetAuthorsForBook : gets all authors for a specific book
 	 */
-	public ObservableList<AuthorBook> GetAuthorsForBook (Book book) {
+	public ObservableList<AuthorBook> GetAuthorsForBook (Book book) throws AppException {
 		ObservableList<AuthorBook> authorBooks = FXCollections.observableArrayList();
 		PreparedStatement st = null;
 		try {
@@ -277,7 +277,7 @@ public class BookGateway extends GatewayBase{
 	 * GetAuthorById : gets a specific author by Id
 	 */
 	
-	public Author GetAuthorById (int authorId) {
+	public Author GetAuthorById (int authorId) throws AppException {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("select * from author where id = ?");
@@ -310,7 +310,7 @@ public class BookGateway extends GatewayBase{
 	/**
 	 * CreateAuthorBookRecord : creates an AuthorBook record as specified by user
 	 */
-	public void CreateAuthorBookRecord (int authorId, int bookId, int royalty) {
+	public void CreateAuthorBookRecord (int authorId, int bookId, int royalty) throws AppException {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("insert into author_book( author_id, book_id, royalty ) values( ?, ?, ? )");
@@ -331,13 +331,13 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
-		createAuditTrailEntry(bookId, "");
+		createAuditTrailEntry(bookId, "Author added to book.");
 	}
 	
 	/**
 	 * UpdateAuthorBookRecord : Updates an AuthorBook record
 	 */
-	public void UpdateRoyalty (AuthorBook AB) {
+	public void UpdateRoyalty (AuthorBook AB) throws AppException {
 		logger.info("Updating Book...");
 		PreparedStatement st = null;
 		try {
@@ -359,12 +359,13 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		createAuditTrailEntry(AB.getMyBook().getId(), "Author's royalty has changed.");
 	}
 	
 	/**
 	 * DeleteAuthorBookRecord : deletes corresponding AuthorBook records of a book upon deletion
 	 */
-	public void DeleteAuthorBookRecord (int bookId) {
+	public void DeleteAuthorBookRecord (int bookId) throws AppException {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("delete from author_book where book_id = ?");

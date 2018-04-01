@@ -251,12 +251,21 @@ public class BookGateway extends GatewayBase{
 			while(rs.next()) {
 				AuthorBook authorBook = new AuthorBook();
 				int authorId;
+				//int val;
 				
 				authorId = rs.getInt("author_id");
 				authorBook.setMyAut(GetAuthorById(authorId));
 				authorBook.setMyBook(book);
-				//BigDecimal num = rs.getBigDecimal("royalty");
+				BigDecimal num = rs.getBigDecimal("royalty");
+				
+				// BigDecimal route
 				//authorBook.setRoyalty( num.multiply(new BigDecimal(100000)) );
+				
+				// BigDecimal to int route
+				//num.multiply(new BigDecimal(100000));
+				//val = num.intValue();
+				//authorBook.setRoyalty(val);
+				
 				
 				authorBooks.add(authorBook);
 			}
@@ -312,13 +321,21 @@ public class BookGateway extends GatewayBase{
 	/**
 	 * CreateAuthorBookRecord : creates an AuthorBook record as specified by user
 	 */
-	public void CreateAuthorBookRecord (int authorId, int bookId, int royalty) throws AppException {
+	public void CreateAuthorBookRecord (int authorId, int bookId, BigDecimal royalty) throws AppException {
 		PreparedStatement st = null;
 		try {
+			// BigDecimal route (if royalty is a BigDecimal)
+			BigDecimal bd = royalty;
+			
+			// Int route (if royalty is an int)
+			//BigDecimal bd = new BigDecimal(royalty);
+			
+			bd.divide(new BigDecimal(100000));
+			
 			st = conn.prepareStatement("insert into author_book( author_id, book_id, royalty ) values( ?, ?, ? )");
 			st.setInt(1, authorId);
 			st.setInt(2, bookId);
-			st.setInt(3, royalty / 100000);
+			st.setBigDecimal(3, bd);
 			
 			st.executeUpdate();
 		} catch (SQLException e) {
@@ -344,8 +361,10 @@ public class BookGateway extends GatewayBase{
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("update AuthorBook set royalty = ? where author_id = ? and book_id = ?");
-			BigDecimal num = AB.getRoyalty();
-			st.setBigDecimal(1, num.divide(new BigDecimal(100000)) );
+			BigDecimal num = AB.getRoyalty(); // if royalty is a BigDecimal
+			//BigDecimal num = new BigDecimal(royalty); // if royalty is an int
+			num = num.divide(new BigDecimal(100000));
+			st.setBigDecimal(1,  num);
 			st.setInt(2, AB.getMyAut().getId());
 			st.setInt(3, AB.getMyBook().getId());
 			

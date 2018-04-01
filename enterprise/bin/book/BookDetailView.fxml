@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -28,10 +29,12 @@
       </MenuBar>
    </top>
    <center>
-      <GridPane maxHeight="247.0" maxWidth="300.0" prefHeight="247.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+      <GridPane maxHeight="250.0" maxWidth="443.0" prefHeight="250.0" prefWidth="443.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="96.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="204.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="141.7999725341797" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="141.7999725341797" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="157.80002746582034" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="145.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
@@ -42,35 +45,64 @@
             <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="firstName" prefHeight="17.0" prefWidth="28.0" text="Title" textAlignment="CENTER" translateX="33.0" />
-            <Label text="Summary" translateX="18.0" GridPane.rowIndex="1" />
-            <Label prefHeight="17.0" prefWidth="94.0" text="Year Published" translateX="1.0" GridPane.rowIndex="2" />
-            <Label text="Publisher" translateX="19.0" GridPane.rowIndex="3" />
-            <Label prefHeight="17.0" prefWidth="31.0" text="ISBN" translateX="32.0" GridPane.rowIndex="4" />
-            <TextField fx:id="title" GridPane.columnIndex="1" />
-            <TextField fx:id="Isbn" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="yrPublished" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextArea fx:id="summary" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox fx:id="pubCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="firstName" prefHeight="17.0" prefWidth="28.0" text="Title" textAlignment="CENTER" translateX="33.0" GridPane.columnIndex="1" />
+            <Label text="Summary" translateX="18.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="94.0" text="Year Published" translateX="1.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Publisher" translateX="19.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label prefHeight="17.0" prefWidth="31.0" text="ISBN" translateX="32.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="title" GridPane.columnIndex="2" />
+            <TextField fx:id="Isbn" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="yrPublished" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextArea fx:id="summary" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="pubCombo" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </center>
    <bottom>
-      <BorderPane prefHeight="66.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="186.0" prefWidth="698.0" BorderPane.alignment="CENTER">
          <center>
-            <GridPane BorderPane.alignment="CENTER">
+            <GridPane prefHeight="149.0" prefWidth="698.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="329.39996337890625" minWidth="10.0" prefWidth="92.99998779296874" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="407.7999847412109" minWidth="10.0" prefWidth="356.2000122070313" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="166.20001220703125" minWidth="10.0" prefWidth="95.99997558593748" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="146.99998321533204" minHeight="10.0" prefHeight="146.99998321533204" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="88.60001220703126" minHeight="10.0" prefHeight="39.800016784667974" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="saveButton" mnemonicParsing="false" onMouseClicked="#OnSaveBookClicked" text="Save" GridPane.columnIndex="1" />
-                  <Button fx:id="auditTrailButton" mnemonicParsing="false" onMouseClicked="#OnAuditClicked" text="Audit Trail" GridPane.columnIndex="2" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" onMouseClicked="#OnSaveBookClicked" text="Save Book" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="auditTrailButton" mnemonicParsing="false" onMouseClicked="#OnAuditClicked" text="Audit Trail" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <GridPane prefHeight="114.0" prefWidth="348.0" GridPane.columnIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="44.599951171875" minHeight="7.799964809417723" prefHeight="17.399971389770506" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="91.00003519058228" minHeight="10.0" prefHeight="81.4000286102295" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <GridPane GridPane.rowIndex="2">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="addAuthor" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Add Author" />
+                              <Button fx:id="delAuthor" mnemonicParsing="false" text="Delete Author" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Label text="Authors" />
+                        <ListView fx:id="AuthorList" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </GridPane>
          </center>

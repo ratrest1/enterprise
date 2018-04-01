@@ -1,6 +1,7 @@
 package db;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -254,7 +255,8 @@ public class BookGateway extends GatewayBase{
 				authorId = rs.getInt("author_id");
 				authorBook.setMyAut(GetAuthorById(authorId));
 				authorBook.setMyBook(book);
-				//authorBook.setRoyalty(rs.getBigDecimal("royalty") * 100000);
+				BigDecimal num = rs.getBigDecimal("royalty");
+				authorBook.setRoyalty( num.multiply(new BigDecimal(100000)) );
 				
 				authorBooks.add(authorBook);
 			}
@@ -342,7 +344,8 @@ public class BookGateway extends GatewayBase{
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("update AuthorBook set royalty = ? where author_id = ? and book_id = ?");
-			//st.setBigDecimal(1, AB.getRoyalty() / 100000);
+			BigDecimal num = AB.getRoyalty();
+			st.setBigDecimal(1, num.divide(new BigDecimal(100000)) );
 			st.setInt(2, AB.getMyAut().getId());
 			st.setInt(3, AB.getMyBook().getId());
 			

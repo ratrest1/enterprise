@@ -1,12 +1,14 @@
 package authorBook;
 
+import java.math.BigDecimal;
+
 import author.Author;
 import book.Book;
 
 public class AuthorBook {
 	Author myAut;
 	Book myBook;
-	int royalty;
+	BigDecimal royalty;
 	boolean newRecord = true;
 	
 	//Accesors

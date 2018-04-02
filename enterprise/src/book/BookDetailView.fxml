@@ -95,7 +95,7 @@
                           </rowConstraints>
                            <children>
                               <Button fx:id="addAuthor" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#OnAddAuthorClicked" text="Add Author" />
-                              <Button fx:id="delAuthor" mnemonicParsing="false" text="Delete Author" GridPane.columnIndex="1" />
+                              <Button fx:id="delAuthor" mnemonicParsing="false" onMouseClicked="#OnDelAutClicked" text="Delete Author" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <Label text="Authors" />

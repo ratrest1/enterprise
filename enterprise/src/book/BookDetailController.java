@@ -84,7 +84,8 @@ public class BookDetailController extends ControllerBase implements Initializabl
     @FXML
     void OnDelAutClicked(MouseEvent event) {
     	BookGateway bg = (BookGateway)this.viewLocation;
-    	//bg.DeleteAuthorBookRecord(  );
+    	bg.DeleteAuthorBookRecord(detailedBook.getId(), authorList.getSelectionModel().getSelectedItem().getMyAut().getId());
+    	authorList.setItems( bg.GetAuthorsForBook(detailedBook) );
     }
 
     /**

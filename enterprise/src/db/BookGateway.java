@@ -257,16 +257,7 @@ public class BookGateway extends GatewayBase{
 				authorBook.setMyAut(GetAuthorById(authorId));
 				authorBook.setMyBook(book);
 				BigDecimal num = rs.getBigDecimal("royalty");
-				
-				// BigDecimal route
-				//authorBook.setRoyalty( num.multiply(new BigDecimal(100000)) );
-				
-				// BigDecimal to int route
-				//num.multiply(new BigDecimal(100000));
-				//val = num.intValue();
-				//authorBook.setRoyalty(val);
-				
-				
+				authorBook.setRoyalty(num);
 				authorBooks.add(authorBook);
 			}
 		} catch (SQLException e) {

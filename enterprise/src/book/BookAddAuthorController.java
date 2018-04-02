@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import author.Author;
 import authorBook.AuthorBook;
 import db.AuthorGateway;
@@ -32,6 +35,7 @@ public class BookAddAuthorController extends ControllerBase implements Initializ
     
     AuthorBook  currAB;
     AuthorGateway ag;
+    private static Logger logger = LogManager.getLogger();
     
     @FXML void OnAuthorClicked(ActionEvent event) {
     	getLoader().LoadController(getLoader().AUT_LIST, null);
@@ -54,8 +58,11 @@ public class BookAddAuthorController extends ControllerBase implements Initializ
     			currAB.setMyAut( authors.get(i));
     		}
     	}
-    	currAB.setRoyalty( BigDecimal.valueOf( Integer.parseInt( royaltyTextField.getText() ) ) );
-    	bg.CreateAuthorBookRecord(currAB.getMyAut().getId(), currAB.getMyBook().getId(), currAB.getRoyalty().intValueExact());
+    	
+    	BigDecimal roy = BigDecimal.valueOf( Double.parseDouble( royaltyTextField.getText() ) );
+    	logger.debug("Royalty: " + roy.toString());
+    	currAB.setRoyalty( roy );
+    	bg.CreateAuthorBookRecord(currAB.getMyAut().getId(), currAB.getMyBook().getId(), currAB.getRoyalty());
     	getLoader().LoadController(ControllerLoader.BOK_DETAIL, currAB.getMyBook());
     }
 

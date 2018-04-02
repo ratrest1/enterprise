@@ -129,7 +129,7 @@ public class BookGateway extends GatewayBase{
 
 	public void deleteBook (Book book) throws AppException {
 		logger.info("Deleting Book...");
-		DeleteAuthorBookRecord(book.getId());
+		//DeleteAuthorBookRecord(book.getId());
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("delete from book where id = ?");

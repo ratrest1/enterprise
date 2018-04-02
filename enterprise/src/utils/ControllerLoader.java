@@ -17,6 +17,7 @@ import author.Author;
 import author.AuthorDetailController;
 import author.AuthorListController;
 import book.Book;
+import book.BookAddAuthorController;
 import book.BookDetailController;
 import book.BookListController;
 import db.AuthorGateway;
@@ -35,6 +36,7 @@ public class ControllerLoader {
 	public static final int BOK_LIST = 4;
 	public static final int BOK_DETAIL = 5;
 	public static final int BOK_AUDIT = 6;
+	public static final int BOK_ADDAUT = 7;
 	
 	
 	private Connection connection;
@@ -98,6 +100,10 @@ public class ControllerLoader {
 				case BOK_AUDIT:
 					fxmlFile = this.getClass().getResource("../audit/bookAuditTrailView.fxml"); 
 					controller = new BookAuditTrailController(new BookGateway(connection),(Book) arg);
+					break;
+				case BOK_ADDAUT:
+					fxmlFile = this.getClass().getResource("../book/BookAddAuthor.fxml"); 
+					controller = new BookAddAuthorController(new BookGateway(connection),(Book) arg);
 					break;
 			}
 			FXMLLoader loader = new FXMLLoader(fxmlFile);

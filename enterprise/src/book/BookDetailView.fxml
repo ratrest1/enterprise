@@ -94,7 +94,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="addAuthor" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Add Author" />
+                              <Button fx:id="addAuthor" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#OnAddAuthorClicked" text="Add Author" />
                               <Button fx:id="delAuthor" mnemonicParsing="false" text="Delete Author" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>

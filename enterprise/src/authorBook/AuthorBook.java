@@ -11,6 +11,10 @@ public class AuthorBook {
 	BigDecimal royalty;
 	boolean newRecord = true;
 	
+	public AuthorBook() {
+		royalty = new BigDecimal(0);
+	}
+	
 	//Accesors
 	public Author getMyAut() {
 		return myAut;
@@ -37,5 +41,7 @@ public class AuthorBook {
 		this.newRecord = newRecord;
 	}
 	
-	
+	public String toString() {
+		return "Author: " + myAut.toString() + "		Royalty: " + getRoyalty().toString();
+	}
 }

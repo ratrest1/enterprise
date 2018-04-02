@@ -75,6 +75,17 @@ public class BookDetailController extends ControllerBase implements Initializabl
     void OnBookClicked(ActionEvent event) {
     	getLoader().LoadController(getLoader().BOK_LIST, null);
     }
+    
+    @FXML
+    void OnAddAuthorClicked(MouseEvent event) {
+    	getLoader().LoadController(getLoader().BOK_ADDAUT, detailedBook);
+    }
+    
+    @FXML
+    void OnDelAutClicked(MouseEvent event) {
+    	BookGateway bg = (BookGateway)this.viewLocation;
+    	//bg.DeleteAuthorBookRecord(  );
+    }
 
     /**
      * 		When the close menu button is pressed.

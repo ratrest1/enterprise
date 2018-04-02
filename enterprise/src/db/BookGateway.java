@@ -387,11 +387,12 @@ public class BookGateway extends GatewayBase{
 	/**
 	 * DeleteAuthorBookRecord : deletes corresponding AuthorBook records of a book upon deletion
 	 */
-	public void DeleteAuthorBookRecord (int bookId) throws AppException {
+	public void DeleteAuthorBookRecord (int bookId, int authorId) throws AppException {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("delete from author_book where book_id = ?");
+			st = conn.prepareStatement("delete from author_book where book_id = ? AND author_id = ?");
 			st.setInt(1, bookId);
+			st.setInt(2, authorId);
 			
 			st.executeUpdate();
 		} catch (SQLException e) {

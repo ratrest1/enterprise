@@ -33,7 +33,10 @@ public class BookListController extends ControllerBase implements Initializable{
     @FXML private Button addBookButton;
     @FXML private Button deleteBookButton;
     @FXML private TextField searchTerm;
-    
+    @FXML private Button firstBut;
+    @FXML private Button prevBut;
+    @FXML private Button NexBut;
+    @FXML private Button lastBut;
     
     private ObservableList<Book> books;							//List of Books
     private Book selBook;										//Selected Book
@@ -106,6 +109,26 @@ public class BookListController extends ControllerBase implements Initializable{
     void OnDeleteClicked(MouseEvent event) {
     	viewLocation.delete(selBook);
     	getLoader().LoadController(getLoader().BOK_LIST, null);
+    }
+    
+    @FXML
+    void OnFirstButClicked(MouseEvent event) {
+    	
+    }
+
+    @FXML
+    void OnLastButClicked(MouseEvent event) {
+    	
+    }
+
+    @FXML
+    void OnNexButClicked(MouseEvent event) {
+    	
+    }
+
+    @FXML
+    void OnPrevButClick(MouseEvent event) {
+    	
     }
 
     /**

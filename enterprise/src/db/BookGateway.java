@@ -223,7 +223,7 @@ public class BookGateway extends GatewayBase{
 	 * @param searchStr
 	 * @return
 	 */
-	public ObservableList<Book> searchBook (String searchStr) {
+	public ObservableList<Book> searchBook (String searchStr) throws AppException {
 		//logger.info("Searching for books.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		PreparedStatement st = null;
@@ -268,7 +268,7 @@ public class BookGateway extends GatewayBase{
 	 * @param searchStr
 	 * @return
 	 */
-	public ObservableList<Book> NewSearchBook (String searchStr, int maxRecords, int idLoc) {
+	public ObservableList<Book> NewSearchBook (String searchStr, int maxRecords, int idLoc) throws AppException {
 		//logger.info("Searching for books.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		PreparedStatement st = null;
@@ -328,12 +328,11 @@ public class BookGateway extends GatewayBase{
 	}
 	
 	
-	// GET NUMBER OF BOOK RECORDS USING SQL
 	/**
 	 * GetNumberOfRecords : gets the total number of records in a database
 	 * @return int
 	 */
-	public int GetNumberOfRecords () {
+	public int GetNumberOfRecords () throws AppException {
 		int val = -1;
 		PreparedStatement st = null;
 		try {

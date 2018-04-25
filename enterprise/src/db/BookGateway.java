@@ -95,6 +95,54 @@ public class BookGateway extends GatewayBase{
 		return books;
 	}
 	
+	
+	/**
+	 * newReadBook: fetches a specific number of books
+	 * @param int
+	 * @throws AppException
+	 */
+	public ObservableList<Book> newReadBook (int maxRecords) throws AppException {
+		//logger.info("Reading Book.");
+		ObservableList<Book> books = FXCollections.observableArrayList();
+		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("select * from book order by id limit ?");
+			st.setInt(1, maxRecords);
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book();
+				int pubID;
+				
+				book.setGateway(this);
+				book.setId(rs.getInt("id"));
+				book.setTitle(rs.getString("title"));
+				book.setSummary(rs.getString("summary"));
+				book.setYearPublished(rs.getInt("year_published"));
+				pubID = rs.getInt("publisher_id");
+				book.setPublisher(pubGateway.getPublisherById(pubID));
+				book.setIsbn(rs.getString("isbn"));
+				book.setDateAdded(rs.getDate("date_added").toLocalDate());
+				
+				books.add(book);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if (st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+		return books;
+	}
+	
+	
 	public void updateBook (Book book) throws AppException {
 		logger.info("Updating Book...");
 		PreparedStatement st = null;
@@ -169,6 +217,11 @@ public class BookGateway extends GatewayBase{
 		}
 	}
 	
+	/**
+	 * searchBook : searches for a specific book by a specific title
+	 * @param searchStr
+	 * @return
+	 */
 	public ObservableList<Book> searchBook (String searchStr) {
 		//logger.info("Searching for books.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
@@ -178,6 +231,52 @@ public class BookGateway extends GatewayBase{
 			st.setString(1, "%" + searchStr + "%");
 			
 			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				Book book = new Book();
+				int pubID;
+				
+				book.setGateway(this);
+				book.setId(rs.getInt("id"));
+				book.setTitle(rs.getString("title"));
+				book.setSummary(rs.getString("summary"));
+				book.setYearPublished(rs.getInt("year_published"));
+				pubID = rs.getInt("publisher_id");
+				book.setPublisher(pubGateway.getPublisherById(pubID));
+				book.setIsbn(rs.getString("isbn"));
+				book.setDateAdded(rs.getDate("date_added").toLocalDate());
+				
+				books.add(book);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+		return books;
+	}
+	
+	/**
+	 * newSearchBook : looks for a set number of specific books
+	 * @param searchStr
+	 * @return
+	 */
+	public ObservableList<Book> newSearchBook (String searchStr, int maxRecords) {
+		//logger.info("Searching for books.");
+		ObservableList<Book> books = FXCollections.observableArrayList();
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("select * from book where title like ? limit ?");
+			st.setString(1, "%" + searchStr + "%");
+			st.setInt(2, maxRecords);
+			ResultSet rs = st.executeQuery();
+			
 			while(rs.next()) {
 				Book book = new Book();
 				int pubID;

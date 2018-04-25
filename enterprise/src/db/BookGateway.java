@@ -329,6 +329,31 @@ public class BookGateway extends GatewayBase{
 	
 	
 	// GET NUMBER OF BOOK RECORDS USING SQL
+	/**
+	 * GetNumberOfRecords : gets the total number of records in a database
+	 * @return int
+	 */
+	public int GetNumberOfRecords () {
+		int val = -1;
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("select count(*) from book");
+			ResultSet rs = st.executeQuery();
+			val = ((Number) rs.getObject(1)).intValue();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+		return val;
+	}
 	
 	
 //-------------------------------------------AUTHORBOOK RELATIONSHIP-----------------------------------------------------//

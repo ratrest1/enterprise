@@ -356,11 +356,11 @@ public class BookGateway extends GatewayBase{
 	}
 	
 	
+	
+	
 //-------------------------------------------AUTHORBOOK RELATIONSHIP-----------------------------------------------------//
 	
-	
-	
-	
+		
 	
 	/**
 	 * GetAuthorsForBook : gets all authors for a specific book

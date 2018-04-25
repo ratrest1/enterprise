@@ -101,7 +101,7 @@ public class BookGateway extends GatewayBase{
 	 * @param int
 	 * @throws AppException
 	 */
-	public ObservableList<Book> newReadBook (int maxRecords, int idLoc) throws AppException {
+	public ObservableList<Book> NewReadBook (int maxRecords, int idLoc) throws AppException {
 		//logger.info("Reading Book.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		
@@ -268,7 +268,7 @@ public class BookGateway extends GatewayBase{
 	 * @param searchStr
 	 * @return
 	 */
-	public ObservableList<Book> newSearchBook (String searchStr, int maxRecords, int idLoc) {
+	public ObservableList<Book> NewSearchBook (String searchStr, int maxRecords, int idLoc) {
 		//logger.info("Searching for books.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		PreparedStatement st = null;

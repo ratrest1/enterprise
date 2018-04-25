@@ -101,14 +101,15 @@ public class BookGateway extends GatewayBase{
 	 * @param int
 	 * @throws AppException
 	 */
-	public ObservableList<Book> newReadBook (int maxRecords) throws AppException {
+	public ObservableList<Book> newReadBook (int maxRecords, int idLoc) throws AppException {
 		//logger.info("Reading Book.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement("select * from book order by id limit ?");
-			st.setInt(1, maxRecords);
+			st.setInt(2, idLoc);
+			st.setInt(2, maxRecords);
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
@@ -267,14 +268,15 @@ public class BookGateway extends GatewayBase{
 	 * @param searchStr
 	 * @return
 	 */
-	public ObservableList<Book> newSearchBook (String searchStr, int maxRecords) {
+	public ObservableList<Book> newSearchBook (String searchStr, int maxRecords, int idLoc) {
 		//logger.info("Searching for books.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("select * from book where title like ? limit ?");
+			st = conn.prepareStatement("select * from book where title like ? and id >= ? limit ?");
 			st.setString(1, "%" + searchStr + "%");
-			st.setInt(2, maxRecords);
+			st.setInt(2, idLoc);
+			st.setInt(3, maxRecords);
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
@@ -326,7 +328,7 @@ public class BookGateway extends GatewayBase{
 	}
 	
 	
-	
+	// GET NUMBER OF BOOK RECORDS USING SQL
 	
 	
 //-------------------------------------------AUTHORBOOK RELATIONSHIP-----------------------------------------------------//

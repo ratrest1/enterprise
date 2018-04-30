@@ -734,5 +734,49 @@ public class BookGateway extends GatewayBase{
 		createEntry(book.getTitle());
 		logger.info("Book Created.");
 	}
+
+	@Override
+	public ObservableList<Object> getFirstPage() {
+		ObservableList<Book> tmp = this.NewReadBook(50, 1);
+		ObservableList<Object> retList = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++)
+		{
+			retList.add( tmp.get(i) );
+		}
+		return retList;
+	}
+
+	@Override
+	public ObservableList<Object> getNextPage(int pageNr) {
+		ObservableList<Book> tmp = this.NewReadBook(50, pageNr);
+		ObservableList<Object> retList = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++)
+		{
+			retList.add( tmp.get(i) );
+		}
+		return retList;
+	}
+
+	@Override
+	public ObservableList<Object> getPrevPage(int pageNr) {
+		ObservableList<Book> tmp = this.NewReadBook(50, pageNr);
+		ObservableList<Object> retList = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++)
+		{
+			retList.add( tmp.get(i) );
+		}
+		return retList;
+	}
+
+	@Override
+	public ObservableList<Object> getLastPage() {
+		ObservableList<Book> tmp = this.NewReadBook(50, 1); //WRONG
+		ObservableList<Object> retList = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++)
+		{
+			retList.add( tmp.get(i) );
+		}
+		return retList;
+	}
 	
 }

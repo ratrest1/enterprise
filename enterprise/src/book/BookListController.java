@@ -40,7 +40,7 @@ public class BookListController extends ControllerBase implements Initializable{
     
     private ObservableList<Book> books;							//List of Books
     private Book selBook;										//Selected Book
-    private int indexBooks;
+    private int pageNr;
     
     /**
      * 		Constructor
@@ -114,23 +114,45 @@ public class BookListController extends ControllerBase implements Initializable{
     
     @FXML
     void OnFirstButClicked(MouseEvent event) {
-    	indexBooks = 1;
+    	pageNr = 1;
+    	ObservableList<Object> tmp = viewLocation.getFirstPage();
+		books = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++ ) {
+			books.add( (Book)tmp.get(i) );
+		}
+		bookList.setItems(books);
     }
 
     @FXML
     void OnLastButClicked(MouseEvent event) {
-    	//indexBooks = lastNumber - 50;
+    	ObservableList<Object> tmp = viewLocation.getLastPage();
+		books = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++ ) {
+			books.add( (Book)tmp.get(i) );
+		}
+		bookList.setItems(books);
     }
 
     @FXML
     void OnNexButClicked(MouseEvent event) {
-    	//if( indexBooks + 50 <= lastNumber )
-    		indexBooks = indexBooks + 50;
+    		pageNr = pageNr + 1;
+    		ObservableList<Object> tmp = viewLocation.getNextPage(pageNr);
+    		books = FXCollections.observableArrayList();
+    		for(int i = 0; i < tmp.size(); i++ ) {
+    			books.add( (Book)tmp.get(i) );
+    		}
+    		bookList.setItems(books);
     }
 
     @FXML
     void OnPrevButClick(MouseEvent event) {
-    	indexBooks = indexBooks - 50;
+    	pageNr = pageNr - 1;
+    	ObservableList<Object> tmp = viewLocation.getPrevPage(pageNr);
+		books = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++ ) {
+			books.add( (Book)tmp.get(i) );
+		}
+		bookList.setItems(books);
     }
 
     /**
@@ -138,7 +160,7 @@ public class BookListController extends ControllerBase implements Initializable{
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ObservableList<Object> tmp = viewLocation.read();
+		ObservableList<Object> tmp = viewLocation.getFirstPage();
 		books = FXCollections.observableArrayList();
 		for(int i = 0; i < tmp.size(); i++ ) {
 			books.add( (Book)tmp.get(i) );

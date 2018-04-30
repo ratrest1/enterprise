@@ -12,6 +12,31 @@ public abstract class GatewayBase {
 	public abstract ObservableList<Object> read();
 	
 	/**
+	 * 		Read from a gateway
+	 * @return the list of objects read.
+	 */
+	public abstract ObservableList<Object> getFirstPage();
+	
+	/**
+	 * 		Read from a gateway
+	 * @return the list of objects read.
+	 */
+	public abstract ObservableList<Object> getNextPage( int pageNr );
+	
+	/**
+	 * 		Read from a gateway
+	 * @return the list of objects read.
+	 */
+	public abstract ObservableList<Object> getPrevPage( int pageNr );
+	
+	/**
+	 * 		Read from a gateway
+	 * @return the list of objects read.
+	 */
+	public abstract ObservableList<Object> getLastPage();
+	
+	
+	/**
 	 * 		delete from a gateway
 	 * @param arg the object being deleted.
 	 */

@@ -40,6 +40,7 @@ public class BookListController extends ControllerBase implements Initializable{
     
     private ObservableList<Book> books;							//List of Books
     private Book selBook;										//Selected Book
+    private int indexBooks;
     
     /**
      * 		Constructor
@@ -113,22 +114,23 @@ public class BookListController extends ControllerBase implements Initializable{
     
     @FXML
     void OnFirstButClicked(MouseEvent event) {
-    	
+    	indexBooks = 1;
     }
 
     @FXML
     void OnLastButClicked(MouseEvent event) {
-    	
+    	//indexBooks = lastNumber - 50;
     }
 
     @FXML
     void OnNexButClicked(MouseEvent event) {
-    	
+    	//if( indexBooks + 50 <= lastNumber )
+    		indexBooks = indexBooks + 50;
     }
 
     @FXML
     void OnPrevButClick(MouseEvent event) {
-    	
+    	indexBooks = indexBooks - 50;
     }
 
     /**

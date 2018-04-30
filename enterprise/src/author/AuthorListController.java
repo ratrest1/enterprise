@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import db.AuthorGateway;
+import db.BookGateway;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -109,5 +110,7 @@ public class AuthorListController extends ControllerBase implements Initializabl
 		}
 		
 		authorList.setItems(authors);
+		//BookGateway bg = (BookGateway)this.viewLocation;
+		//bg.MakeBooks();
 	}
 }

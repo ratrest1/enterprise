@@ -103,15 +103,21 @@ public class BookGateway extends GatewayBase{
 	 * @param int
 	 * @throws AppException
 	 */
-	public ObservableList<Book> NewReadBook (int maxRecords, int idLoc) throws AppException {
+	public ObservableList<Book> NewReadBook (int maxRecords, int pageNr) throws AppException {
 		//logger.info("Reading Book.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
-		
 		PreparedStatement st = null;
+		
+		int pNr = pageNr - 1;
+		if (pageNr == 0)
+			pNr = 0;
+		else
+			pNr = pageNr * maxRecords;
+		
 		try {
-			st = conn.prepareStatement("select * from book order by id limit ?");
-			st.setInt(2, idLoc);
-			st.setInt(2, maxRecords);
+			st = conn.prepareStatement("select * from book order by id limit ? offset ?");
+			st.setInt(1, maxRecords);
+			st.setInt(2, pNr);
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
@@ -270,15 +276,21 @@ public class BookGateway extends GatewayBase{
 	 * @param searchStr
 	 * @return
 	 */
-	public ObservableList<Book> NewSearchBook (String searchStr, int maxRecords, int idLoc) throws AppException {
+	public ObservableList<Book> NewSearchBook (String searchStr, int maxRecords, int pageNr) throws AppException {
 		//logger.info("Searching for books.");
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		PreparedStatement st = null;
+		int pNr = pageNr - 1;
+		if (pageNr == 0)
+			pNr = 0;
+		else
+			pNr = pageNr * maxRecords;
+
 		try {
-			st = conn.prepareStatement("select * from book where title like ? and id >= ? limit ?");
+			st = conn.prepareStatement("select * from book where title like ? limit ? OFFSET ?");
 			st.setString(1, "%" + searchStr + "%");
-			st.setInt(2, idLoc);
-			st.setInt(3, maxRecords);
+			st.setInt(2, maxRecords);
+			st.setInt(3, pNr);
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {

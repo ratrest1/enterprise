@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import publisher.Publisher;
+
 import audit.AuditTrailEntry;
 import author.Author;
 import authorBook.AuthorBook;
@@ -672,6 +674,53 @@ public class BookGateway extends GatewayBase{
 		}
 		logger.info("Got Audit Trail.");
 		return auditTrail;
+	}
+	
+	//---------------------------------------------THROWAWAY FUNCTION---------------------------------------------//
+	public void MakeBooks () {
+		Book book;
+		ObservableList<Publisher> publishers = pubGateway.getPublishers();
+		int listSz = publishers.size();
+		int insertVal;
+		
+		for (int i = 1; i <= 10000; i++) {
+			insertVal = ((i % listSz) + 1);
+			book = new Book();
+			book.setTitle("Book " + i);
+			book.setSummary("This is book " + i);
+			book.setYearPublished(i % 2018);
+			book.setIsbn("1234567890123");
+			NewCreateBook(book, insertVal);
+		}
+	}
+	
+	public void NewCreateBook (Book book, int pubId) throws AppException {
+		logger.info("Creating Book...");
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("insert into book( title, summary, "
+					+ "year_published, publisher_id, isbn ) values(?, ?, ?, ?, ?)");
+			st.setString(1, book.getTitle());
+			st.setString(2, book.getSummary());
+			st.setInt(3, book.getYearPublished());
+			st.setInt(4, pubId);
+			st.setString(5, book.getIsbn());
+			
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(e);
+		} finally {
+			try {
+				if(st != null)
+					st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new AppException(e);
+			}
+		}
+		createEntry(book.getTitle());
+		logger.info("Book Created.");
 	}
 	
 }

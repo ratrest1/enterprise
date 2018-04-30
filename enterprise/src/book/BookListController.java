@@ -40,7 +40,7 @@ public class BookListController extends ControllerBase implements Initializable{
     
     private ObservableList<Book> books;							//List of Books
     private Book selBook;										//Selected Book
-    private int pageNr;
+    private int pageNr = 1;
     
     /**
      * 		Constructor

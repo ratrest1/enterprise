@@ -737,7 +737,7 @@ public class BookGateway extends GatewayBase{
 
 	@Override
 	public ObservableList<Object> getFirstPage() {
-		ObservableList<Book> tmp = this.NewReadBook(50, 1);
+		ObservableList<Book> tmp = this.NewReadBook(50, 0);
 		ObservableList<Object> retList = FXCollections.observableArrayList();
 		for(int i = 0; i < tmp.size(); i++)
 		{

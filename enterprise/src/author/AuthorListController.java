@@ -110,7 +110,8 @@ public class AuthorListController extends ControllerBase implements Initializabl
 		}
 		
 		authorList.setItems(authors);
-		//BookGateway bg = (BookGateway)this.viewLocation;
-		//bg.MakeBooks();
+		BookGateway bg = new BookGateway( getLoader().getConnection() );
+		bg.MakeBooks();
+		logger.info("Books Made.");
 	}
 }

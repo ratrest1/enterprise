@@ -1,5 +1,8 @@
+/audit/
+/author/
 /authorBook/
 /book/
 /db/
-/author/
+/log4j2.xml
+/publisher/
 /utils/

@@ -322,5 +322,29 @@ public class AuthorGateway extends GatewayBase{
 		logger.info("Got Audit Trail.");
 		return auditTrail;
 	}
+
+	@Override
+	public ObservableList<Object> getFirstPage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ObservableList<Object> getNextPage(int pageNr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ObservableList<Object> getPrevPage(int pageNr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ObservableList<Object> getLastPage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

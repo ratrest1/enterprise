@@ -352,7 +352,11 @@ public class BookGateway extends GatewayBase{
 		try {
 			st = conn.prepareStatement("select count(*) from book");
 			ResultSet rs = st.executeQuery();
-			val = ((Number) rs.getObject(1)).intValue();
+			
+			//val = ((Number) rs.getObject(1)).intValue();
+			rs.next();
+			val = rs.getInt(1);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException(e);

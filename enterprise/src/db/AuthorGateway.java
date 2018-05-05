@@ -346,5 +346,11 @@ public class AuthorGateway extends GatewayBase{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int getNumRec() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

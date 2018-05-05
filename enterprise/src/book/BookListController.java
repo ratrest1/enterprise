@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -37,10 +38,11 @@ public class BookListController extends ControllerBase implements Initializable{
     @FXML private Button prevBut;
     @FXML private Button NexBut;
     @FXML private Button lastBut;
+    @FXML private Label fetRecLab;
     
     private ObservableList<Book> books;							//List of Books
     private Book selBook;										//Selected Book
-    private int pageNr = 1;
+    private int pageNr;
     
     /**
      * 		Constructor
@@ -114,45 +116,58 @@ public class BookListController extends ControllerBase implements Initializable{
     
     @FXML
     void OnFirstButClicked(MouseEvent event) {
-    	pageNr = 1;
+    	pageNr = 0;
     	ObservableList<Object> tmp = viewLocation.getFirstPage();
 		books = FXCollections.observableArrayList();
 		for(int i = 0; i < tmp.size(); i++ ) {
 			books.add( (Book)tmp.get(i) );
 		}
 		bookList.setItems(books);
+		fetRecLab.setText("Fetched Records " + ((pageNr * 50) + 1) + " through " + ((pageNr * 50) + 50) + " out of " + viewLocation.getNumRec());
     }
 
     @FXML
     void OnLastButClicked(MouseEvent event) {
+    	pageNr = (viewLocation.getNumRec() / 50) - 1;
     	ObservableList<Object> tmp = viewLocation.getLastPage();
 		books = FXCollections.observableArrayList();
 		for(int i = 0; i < tmp.size(); i++ ) {
 			books.add( (Book)tmp.get(i) );
 		}
 		bookList.setItems(books);
+		fetRecLab.setText("Fetched Records " + ((pageNr * 50) + 1) + " through " + ((pageNr * 50) + 50) + " out of " + viewLocation.getNumRec());
     }
 
     @FXML
     void OnNexButClicked(MouseEvent event) {
+    	if( pageNr != (viewLocation.getNumRec() / 50) - 1) {
     		pageNr = pageNr + 1;
-    		ObservableList<Object> tmp = viewLocation.getNextPage(pageNr);
-    		books = FXCollections.observableArrayList();
-    		for(int i = 0; i < tmp.size(); i++ ) {
-    			books.add( (Book)tmp.get(i) );
-    		}
-    		bookList.setItems(books);
+    	}else {
+    		OnLastButClicked(null);
+    	}
+		ObservableList<Object> tmp = viewLocation.getNextPage(pageNr);
+		books = FXCollections.observableArrayList();
+		for(int i = 0; i < tmp.size(); i++ ) {
+			books.add( (Book)tmp.get(i) );
+		}
+		bookList.setItems(books);
+		fetRecLab.setText("Fetched Records " + ((pageNr * 50) + 1) + " through " + ((pageNr * 50) + 50) + " out of " + viewLocation.getNumRec());
     }
 
     @FXML
     void OnPrevButClick(MouseEvent event) {
-    	pageNr = pageNr - 1;
+    	if (pageNr > 1) {
+    		pageNr = pageNr - 1;
+    	}else {
+    		OnFirstButClicked(null);
+    	}
     	ObservableList<Object> tmp = viewLocation.getPrevPage(pageNr);
 		books = FXCollections.observableArrayList();
 		for(int i = 0; i < tmp.size(); i++ ) {
 			books.add( (Book)tmp.get(i) );
 		}
 		bookList.setItems(books);
+		fetRecLab.setText("Fetched Records " + ((pageNr * 50) + 1) + " through " + ((pageNr * 50) + 50) + " out of " + viewLocation.getNumRec());
     }
 
     /**
@@ -160,11 +175,6 @@ public class BookListController extends ControllerBase implements Initializable{
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ObservableList<Object> tmp = viewLocation.getFirstPage();
-		books = FXCollections.observableArrayList();
-		for(int i = 0; i < tmp.size(); i++ ) {
-			books.add( (Book)tmp.get(i) );
-		}
-		bookList.setItems(books);
+		OnFirstButClicked(null);
 	}
 }

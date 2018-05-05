@@ -35,6 +35,8 @@ public abstract class GatewayBase {
 	 */
 	public abstract ObservableList<Object> getLastPage();
 	
+	public abstract int getNumRec();
+	
 	
 	/**
 	 * 		delete from a gateway

@@ -24,10 +24,12 @@ public class BookGateway extends GatewayBase{
 	private static Logger logger = LogManager.getLogger();		//Logger
 	private Connection conn;
 	public PublisherGateway pubGateway;
+	private int numRec;
 
 	public BookGateway (Connection conn) {
 		this.conn = conn;
 		pubGateway = new PublisherGateway(conn);
+		numRec = this.GetNumberOfRecords();
 	}
 	
 	public void createBook (Book book) throws AppException {
@@ -55,6 +57,7 @@ public class BookGateway extends GatewayBase{
 		}
 		createEntry(book.getTitle());
 		logger.info("Book Created.");
+		this.numRec = this.GetNumberOfRecords();
 	}
 	
 	// add authors from database
@@ -224,6 +227,7 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		this.numRec = this.GetNumberOfRecords();
 	}
 	
 	/**
@@ -541,6 +545,7 @@ public class BookGateway extends GatewayBase{
 			}
 		}
 		createAuditTrailEntry(bookId, "Author deleted from book.");
+		this.numRec = this.GetNumberOfRecords();
 	}
 	
 	
@@ -581,6 +586,7 @@ public class BookGateway extends GatewayBase{
 				throw new AppException(e);
 			}
 		}
+		this.numRec = this.GetNumberOfRecords();
 	}
 	
 	/**
@@ -736,6 +742,7 @@ public class BookGateway extends GatewayBase{
 			}
 		}
 		createEntry(book.getTitle());
+		this.numRec = this.GetNumberOfRecords();
 		logger.info("Book Created.");
 	}
 
@@ -774,13 +781,18 @@ public class BookGateway extends GatewayBase{
 
 	@Override
 	public ObservableList<Object> getLastPage() {
-		ObservableList<Book> tmp = this.NewReadBook(50, 1); //WRONG
+		ObservableList<Book> tmp = this.NewReadBook(50, (this.numRec/50) - 1 ); //WRONG
 		ObservableList<Object> retList = FXCollections.observableArrayList();
 		for(int i = 0; i < tmp.size(); i++)
 		{
 			retList.add( tmp.get(i) );
 		}
 		return retList;
+	}
+
+	@Override
+	public int getNumRec() {
+		return this.numRec;
 	}
 	
 }

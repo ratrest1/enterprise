@@ -770,7 +770,7 @@ public class BookGateway extends GatewayBase{
 
 	@Override
 	public ObservableList<Object> getLastPage() {
-		ObservableList<Book> tmp = this.NewReadBook(50, this.GetNumberOfRecords() - 50 ); 
+		ObservableList<Book> tmp = this.NewReadBook(50, 1); //WRONG
 		ObservableList<Object> retList = FXCollections.observableArrayList();
 		for(int i = 0; i < tmp.size(); i++)
 		{

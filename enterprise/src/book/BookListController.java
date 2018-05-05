@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -38,7 +37,6 @@ public class BookListController extends ControllerBase implements Initializable{
     @FXML private Button prevBut;
     @FXML private Button NexBut;
     @FXML private Button lastBut;
-    @FXML private Label fetRecLab;
     
     private ObservableList<Book> books;							//List of Books
     private Book selBook;										//Selected Book
@@ -123,7 +121,6 @@ public class BookListController extends ControllerBase implements Initializable{
 			books.add( (Book)tmp.get(i) );
 		}
 		bookList.setItems(books);
-		
     }
 
     @FXML

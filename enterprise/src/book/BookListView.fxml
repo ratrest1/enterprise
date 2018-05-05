@@ -65,7 +65,7 @@
                   <Button fx:id="prevBut" mnemonicParsing="false" onMouseClicked="#OnPrevButClick" text="Prev" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <Button fx:id="NexBut" mnemonicParsing="false" onMouseClicked="#OnNexButClicked" text="Next" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
                   <Button fx:id="lastBut" mnemonicParsing="false" onMouseClicked="#OnLastButClicked" text="Last" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Label text="Fetched Records 1 of 50 out of 57" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                  <Label fx:id="fetRecLab" text="Fetched Records 1 of 50 out of 57" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
          </top>
